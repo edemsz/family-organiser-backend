@@ -4,3 +4,5 @@ BME-VIK Project laboratory task on organising family members, events or common s
 Test users:
 
 Homepage:
+
+[Documentation](https://github.com/edemsz/family-organiser-backend/tree/master/Documentation)
