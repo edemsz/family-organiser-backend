@@ -1,6 +1,6 @@
 # **Családi szervező mobil fullstack alkalmazás**
 
-# Specifikáció
+## Specifikáció
 
 Az alkalmazásunk egy család életét könnyíti meg: lehetőség van benne a családi dolgok rendszerezésére, nyilvántartására.
 A felhasználó egy családhoz tartozik. Egy családnak több tagját tároljuk: gyerekeket, szülőket, nagymamát, akár háziállatokat is. Egy családtagról tároljuk a vezetéknevét, keresztnevét, telefonszámát, e-mail-címét, illetve egy fotót is. A családtagok adatai szerkeszthetők utólag is. A családnak van egy családfője, aki mindenhez hozzáfér.
