@@ -2,7 +2,7 @@
 ## 2. hétre
 Elkészítettem a GitHub repómat, a Discord szervert, a Trello boardot, egyszóval mindent, ami a szervezéshez kell.
 
-A specifikációval is haladtam, megírtam kezdetleges szinten, közben végiggondoltam, hogy hogy lehetne nagy vonalakban megvalósítani a projektet.
+A specifikációval is haladtam, megírtam kezdetleges szinten, közben végiggondoltam, hogy hogy lehetne nagy vonalakban megvalósítani a projektet. A dokumentációkat az én repómba írjuk, hogy egy helyen legyenek.
 
 Az alap backend részt felhúztam. Eldöntendő még, hogy milyen adatbázist használjunk: nekem viszonylagos tapasztalatom a MySQL-lel van, de a BME-s Oracle szerver is felmerült bennem használatra.
 
