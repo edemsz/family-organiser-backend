@@ -1,11 +1,13 @@
-package bme.familyorganiserbackend.FamilyMember
+package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.family.Family
 import java.util.Date
 import javax.persistence.*
 
 @Entity
 @Table(name="FAMILY_MEMBERS")
 class FamilyMember {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long=0
@@ -24,6 +26,10 @@ class FamilyMember {
 
     @Column(nullable=true)
     var birthDate: Date?=null
+
+    @ManyToOne
+    @JoinColumn(name="family_id", referencedColumnName = "id")
+    lateinit var family: Family
 
     companion object{
         fun fromFamilyMember(member: FamilyMember): FamilyMember {

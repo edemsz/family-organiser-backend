@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.FamilyMember
+package bme.familyorganiserbackend.familymember
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

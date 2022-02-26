@@ -1,5 +1,6 @@
-package bme.familyorganiserbackend.FamilyMember
+package bme.familyorganiserbackend.familymember
 
+import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -7,14 +8,15 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/family_member")
 class FamilyMemberController(private val service: FamilyMemberService) {
     @GetMapping
-    fun getMembers(): List<FamilyMember> = service.getMembers()
+    @ApiOperation(value =" Gets all family members.")
+    fun GetMembers(): List<FamilyMember> = service.getMembers()
 
     @PostMapping
-    fun addMember( @RequestBody member: FamilyMember): ResponseEntity<FamilyMember> =
+    fun AddMember( @RequestBody member: FamilyMember): ResponseEntity<FamilyMember> =
         service.addMember(member)
 
     @PutMapping("/{id}")
-    fun updateTaskById( @PathVariable(value = "id") id:Long
+    fun UpdateTaskById( @PathVariable(value = "id") id:Long
         ,@RequestBody  member:FamilyMember)
     {
         service.putMember(id,member)
