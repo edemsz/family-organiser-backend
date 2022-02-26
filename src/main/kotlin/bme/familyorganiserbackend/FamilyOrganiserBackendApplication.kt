@@ -8,4 +8,5 @@ class FamilyOrganiserBackendApplication
 
 fun main(args: Array<String>) {
     runApplication<FamilyOrganiserBackendApplication>(*args)
+
 }
