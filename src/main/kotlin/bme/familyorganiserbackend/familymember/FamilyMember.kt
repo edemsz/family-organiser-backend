@@ -1,12 +1,24 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.family.Family
-import java.util.Date
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
 @Table(name="FAMILY_MEMBERS")
-class FamilyMember {
+class FamilyMember() {
+    constructor(
+        surname:String, lastName:String,
+        email:String, photo:String?, birthDate: LocalDate?, family:Family?) : this() {
+        this.surname=surname
+        this.lastName=lastName
+        this.email=email
+        this.photo=photo
+        this.birthDate=birthDate
+        this.family=family
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +37,12 @@ class FamilyMember {
     var photo: String?=null
 
     @Column(nullable=true)
-    var birthDate: Date?=null
+    var birthDate: LocalDate?=null
 
-    @ManyToOne
+    @ManyToOne(cascade= arrayOf(CascadeType.MERGE))
+    @JsonManagedReference
     @JoinColumn(name="family_id", referencedColumnName = "id")
-    lateinit var family: Family
+    var family: Family?=null
 
     companion object{
         fun fromFamilyMember(member: FamilyMember): FamilyMember {

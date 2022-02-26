@@ -1,11 +1,18 @@
 package bme.familyorganiserbackend.family
 
 import bme.familyorganiserbackend.familymember.FamilyMember
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 
 
 @Entity
-class Family {
+class Family() {
+    constructor(name:String,head:FamilyMember?=null,members:List<FamilyMember>?=null) : this() {
+        this.name=name
+        this.head=head
+        this.members=members ?: listOf()
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -14,11 +21,13 @@ class Family {
     @Column(nullable=false)
     lateinit var name:String
 
-    @OneToOne()
+    @OneToOne(cascade= arrayOf(CascadeType.MERGE))
+    @JsonBackReference
     @JoinColumn(name="head_id", referencedColumnName = "id")
-    lateinit var head:FamilyMember
+    var head:FamilyMember?=null
 
-    @OneToMany(mappedBy = "family")
-    lateinit var members:List<FamilyMember>
+    @OneToMany(mappedBy = "family",cascade= arrayOf(CascadeType.MERGE))
+    @JsonBackReference
+    var members:List<FamilyMember>?=null
 
 }
