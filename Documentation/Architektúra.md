@@ -3,6 +3,7 @@ A backend architektúrája az MVC elvet követi.
 
 Az alkalmazás architektúrájának váza itt látható:
 ![](Architektúra.png)
+(Az ábrán egyes elemek között oda-vissza (kettős) nyíl van. Ez csak annak a leegyszerűsítése, hogy az egyik komponens a másiknak kérést küld, majd attól választ kap. Természetesen pl. a Service közvetlenül nem kommunikál a Controllerrel, csak akkor kommunikál vele, ha a Controllernek visszaad valamit.)
 Ahogy látható, az alkalmazásban az egyedek (**Entity**) építik fel a modellt. Ezek egymással különféle kapcsolatban lehetnek (dependencia, tartalmazás, öröklés stb.), ezeknek a modellezése későbbi feladat UML-ben. Azt azonban biztosan tudjuk, hogy egymással össze vannak kötve, ahogy az a rajzon látszik is: _Entity1_ és _Entity2_ között kapcsolat van (hogy milyen, az a modellezés ezen szakaszában mindegy is). 
 
 A kapcsolatok leírására navigation propertyt használunk, ezek lényegében referenciák a másik hivatkozott objektumre. Ezen kapcsolatok nem ritkán lehetnek (lesznek) körkörösek, amik nehezen sorosíthatók pl. JSON-be. Ennek elhárítására **DTO**-kat használ a program, amik azonos vagy kevesebb tartalommal bírnak, mint az egyedek, viszont nincs köztük körkörös függőség, így egyszerűen sorosíthatók.
