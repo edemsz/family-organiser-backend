@@ -11,3 +11,11 @@ Megrajzoltam a specifikáció alapján egy kezdetleges ER-diagramot: ezen az egy
 Kotlin ismereteimet felfrissítettem, ugyanis volt egy lyukasórám, és beültem Ekler Péterhez Androidra, ahol a Kotlinról (is) volt szó. :)
 
 Matyival egyeztettem a kommunikációs protokollról, és természetesen a REST API-ban állapodtunk meg. A konkrét végpontokat majd a későbbiekben egyeztetjük.
+
+## 3. hétre
+Megírtam a backend architektúrájának a felépítését. Ehhez leírásokat néztem, hogy hogy kellene egy Spring MVC app architektúráját megtervezni. Ezzel kapcsolatban az még kérdéses bennem, hogy az adatbázishoz kapcsolódáshoz sok repositoryt használjunk vagy egy DAO-t. Saját ábrát is csináltam, hogy hogy képzelem el a komponensek közötti kommunikációt.
+Megírtam a FamilyMember osztályait az architektúra alapján. Még nem tökéletes, de már mutatja, hogy hogy kellene kivitelezni a többit is.
+Az alkalmazásba sikeresen beimportáltam a Swaggert. Ezekhez útmutatókat néztem. A standard erroros endpointokat (amiket alapból mutat a Swagger) kivettem, most már csak a FamilyMemberService endpointjai látszanak.
+Konzultáltam a többiekkel az előző konziról.
+Felvettem egy DataLoader osztályt, ami a szükséges adatokkal feltölti induláskor a memóriát.
+Konzultátam Matyival a Swaggerről.
