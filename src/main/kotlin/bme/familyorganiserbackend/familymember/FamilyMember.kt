@@ -10,6 +10,17 @@ import javax.persistence.*
 @Table(name="FAMILY_MEMBERS")
 class FamilyMember() {
     constructor(
+        id:Long,surname:String, lastName:String,
+        email:String, photo:String?, birthDate: LocalDate?, family:Family?) : this() {
+        this.surname=surname
+        this.id=id
+        this.lastName=lastName
+        this.email=email
+        this.photo=photo
+        this.birthDate=birthDate
+        this.family=family
+    }
+    constructor(
         surname:String, lastName:String,
         email:String, photo:String?, birthDate: LocalDate?, family:Family?) : this() {
         this.surname=surname
@@ -43,6 +54,11 @@ class FamilyMember() {
     @JsonManagedReference
     @JoinColumn(name="family_id", referencedColumnName = "id")
     var family: Family?=null
+
+    fun toDto(): FamilyMemberPlain {
+        val dto=FamilyMemberPlain(this)
+        return dto
+    }
 
     companion object{
         fun fromFamilyMember(member: FamilyMember): FamilyMember {

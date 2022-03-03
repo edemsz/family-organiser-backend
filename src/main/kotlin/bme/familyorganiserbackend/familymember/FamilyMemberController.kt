@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.*
 class FamilyMemberController(private val service: FamilyMemberService) {
 
     @GetMapping
-    @ApiOperation(value =" Gets all family members.")
-    fun getMembers(): ResponseEntity<List<FamilyMember>> = ResponseEntity.ok(service.getMembers())
+    @ApiOperation(value = " Gets all family members.")
+    fun getMembers(): ResponseEntity<List<FamilyMemberPlain>> =
+        ResponseEntity.ok(service.getMembers().map { it.toDto() })
 
     @PostMapping
-    @ApiOperation(value ="Adds a family member.")
-    fun addMember(@RequestBody member: FamilyMember): ResponseEntity<FamilyMember> =
-        ResponseEntity.ok(service.addMember(member))
+    @ApiOperation(value = "Adds a family member.")
+    fun addMember(@RequestBody memberDto: FamilyMemberPlain): ResponseEntity<FamilyMember> {
+        val member: FamilyMember= memberDto.toFamilyMember()
+        return ResponseEntity.ok(service.addMember(member))
+    }
 
     @PutMapping("/{id}")
     @ApiOperation(value ="Updates the data of a family member.")
