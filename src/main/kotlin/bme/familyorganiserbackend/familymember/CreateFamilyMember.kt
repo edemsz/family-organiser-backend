@@ -2,9 +2,7 @@ package bme.familyorganiserbackend.familymember
 
 import java.time.LocalDate
 
-class FamilyMemberPlain {
-    var id: Long=0
-
+class CreateFamilyMember {
     lateinit var surname: String
 
     lateinit var lastName: String
@@ -18,6 +16,5 @@ class FamilyMemberPlain {
     var familyId:Long?=null
 
     lateinit var uid:String
-
 
 }

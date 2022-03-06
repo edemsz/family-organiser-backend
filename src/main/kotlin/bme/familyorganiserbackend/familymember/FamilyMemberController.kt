@@ -1,6 +1,9 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.security.LoginDTO
+import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
+import jdk.jshell.spi.ExecutionControl.NotImplementedException
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,40 +14,51 @@ class FamilyMemberController(private val service: FamilyMemberService) {
 
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
-    fun getMembers(): ResponseEntity<List<FamilyMemberPlain>> =
-        ResponseEntity.ok(service.getMembers().map { it.toDto() })
+    fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
+        ResponseEntity.ok(service.getMembers())
+        throw NotImplementedError()
+    }
 
     @PostMapping
     @ApiOperation(value = "Adds a family member.")
-    fun addMember(@RequestBody memberDto: FamilyMemberPlain): ResponseEntity<FamilyMember> {
-        val member: FamilyMember= memberDto.toFamilyMember()
-        return ResponseEntity.ok(service.addMember(member))
+    fun addMember(@RequestBody memberDto: CreateFamilyMember): ResponseEntity<FamilyMemberGet> {
+        throw NotImplementedError()
     }
 
     @PutMapping("/{id}")
     @ApiOperation(value ="Updates the data of a family member.")
     fun updateMemberById(@PathVariable(value = "id") id:Long
-                         , @RequestBody  member:FamilyMember) : ResponseEntity<FamilyMember>
+                         , @RequestBody  member:CreateFamilyMember) : ResponseEntity<FamilyMemberGet>
     {
-        return try{
-            ResponseEntity.ok(service.updateMember(id,member))
-        } catch (e: NotFoundException){
-            ResponseEntity.notFound().build()
-        }
+        throw NotImplementedError()
+
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value ="Gets the data of the member by the ID.")
-    fun getMemberById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMember>{
-        val m= service.getMemberById(id) ?: return ResponseEntity.notFound().build()
-        return ResponseEntity.ok(m)
+    fun getMemberById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberGet>{
+        throw NotImplementedError()
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation(value ="Deletes the member by the ID.")
-    fun deleteById(@PathVariable(value="id") id: Long){
-        service.deleteMember(id)
+    fun deleteById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberPlain>{
+        throw NotImplementedError()
     }
+
+    @PostMapping("/register")
+    @ApiOperation("Sign up method for users")
+    fun register(@RequestBody loginData:LoginDTO):ResponseEntity<Tokens>{
+        throw NotImplementedError()
+    }
+
+    @PostMapping("/login")
+    @ApiOperation("Login method for users")
+    fun login(@RequestBody loginData:LoginDTO){
+        throw NotImplementedError()
+    }
+
+
 
 
 }

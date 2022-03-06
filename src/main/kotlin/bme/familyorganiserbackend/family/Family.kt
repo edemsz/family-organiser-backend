@@ -7,6 +7,7 @@ import javax.persistence.*
 
 
 @Entity
+@Table(name="FAMILY")
 class Family() {
     constructor(name:String,head:FamilyMember?=null,members:List<FamilyMember>?=null) : this() {
         this.name=name
