@@ -3,8 +3,6 @@ package bme.familyorganiserbackend.familymember
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
-import jdk.jshell.spi.ExecutionControl.NotImplementedException
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -15,8 +13,7 @@ class FamilyMemberController(private val service: FamilyMemberService) {
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
     fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
-        ResponseEntity.ok(service.getMembers())
-        throw NotImplementedError()
+        return ResponseEntity.ok(service.getMembers().map { FamilyMemberGet(it.id,it.surname,it.lastName,it.email,it.photo,it.birthDate,it.family?.toPlain(),it.username,it.uid) })
     }
 
     @PostMapping
