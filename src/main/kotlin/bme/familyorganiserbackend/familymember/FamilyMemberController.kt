@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/family_member")
+@RequestMapping("/api/family-member")
 class FamilyMemberController(private val service: FamilyMemberService) {
 
     @GetMapping

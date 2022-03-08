@@ -11,4 +11,6 @@ class FamilyPlain {
 
     var members:List<FamilyMemberPlain?>?=null
 
+    lateinit var code:String
+
 }

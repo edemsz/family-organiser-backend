@@ -22,6 +22,9 @@ class Family() {
     @Column(nullable=false)
     lateinit var name:String
 
+    @Column(nullable=true)
+    var code:String="egyed1K0d"
+
     @OneToOne(cascade= arrayOf(CascadeType.MERGE))
     @JsonBackReference
     @JoinColumn(name="head_id", referencedColumnName = "id")
