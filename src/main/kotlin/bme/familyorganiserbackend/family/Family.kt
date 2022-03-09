@@ -37,13 +37,6 @@ class Family() {
     @OneToMany(mappedBy = "family", cascade= arrayOf(CascadeType.MERGE))
     var shoppingLists:List<ShoppingList>? =null
 
-    fun toPlain():FamilyPlain{
-        val familyPlain =FamilyPlain()
-        familyPlain.name=this.name
-        familyPlain.id=this.id
-        familyPlain.head=this.head?.toPlain()
-        familyPlain.members=this.members?.map { it.toPlain() }
-        return familyPlain
-    }
+
 
 }

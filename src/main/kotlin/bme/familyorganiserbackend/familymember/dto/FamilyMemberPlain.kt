@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.familymember
+package bme.familyorganiserbackend.familymember.dto
 
 import java.time.LocalDate
 

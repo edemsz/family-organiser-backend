@@ -1,5 +1,8 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
+import bme.familyorganiserbackend.familymember.dto.FamilyMemberGet
+import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
@@ -13,7 +16,7 @@ class FamilyMemberController(private val service: FamilyMemberService) {
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
     fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
-        return ResponseEntity.ok(service.getMembers().map { FamilyMemberGet(it.id,it.surname,it.lastName,it.email,it.photo,it.birthDate,it.family?.toPlain(),it.username,it.uid) })
+        throw  NotImplementedError()
     }
 
     @PostMapping
@@ -25,7 +28,8 @@ class FamilyMemberController(private val service: FamilyMemberService) {
     @PutMapping("/{id}")
     @ApiOperation(value ="Updates the data of a family member.")
     fun updateMemberById(@PathVariable(value = "id") id:Long
-                         , @RequestBody  member:CreateFamilyMember) : ResponseEntity<FamilyMemberGet>
+                         , @RequestBody  member: CreateFamilyMember
+    ) : ResponseEntity<FamilyMemberGet>
     {
         throw NotImplementedError()
 

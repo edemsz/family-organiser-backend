@@ -1,6 +1,7 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.family.Family
+import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDate
@@ -66,20 +67,5 @@ class FamilyMember() {
     @Column(nullable = false, name = "user_id")
     lateinit var uid:String
 
-    fun toPlain(): FamilyMemberPlain {
-        return FamilyMemberPlain(id, surname, lastName, email, photo, birthDate, family?.id, uid, username)
 
-    }
-
-    companion object{
-        fun fromFamilyMember(member: FamilyMember): FamilyMember {
-            val newMember=FamilyMember()
-            newMember.photo=member.photo
-            newMember.email=member.email
-            newMember.surname=member.surname
-            newMember.lastName=member.lastName
-            newMember.birthDate=member.birthDate
-            return newMember
-        }
-    }
 }

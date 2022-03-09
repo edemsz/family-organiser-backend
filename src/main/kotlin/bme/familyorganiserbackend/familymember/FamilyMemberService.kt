@@ -14,9 +14,6 @@ class FamilyMemberService(private val repository: FamilyMemberRepository) {
         repository.findById(id).orElse(null)
 
     fun updateMember(id: Long, newMember: FamilyMember): FamilyMember {
-        if(repository.existsById(id)){
-            return repository.save(FamilyMember.fromFamilyMember(newMember))
-        }
         throw NotFoundException()
     }
 
