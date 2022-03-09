@@ -45,6 +45,14 @@ class ShoppingListItemController {
         throw NotImplementedError()
     }
 
+    @PatchMapping("/{id}/purchase")
+    @ApiOperation(value = "Purchasing the item by the ID.")
+    fun purchaseById(@PathVariable(value = "id") id:Long):ResponseEntity<ShoppingListItemPlain>{
+        throw NotImplementedError()
+    }
+
+
+
 
 
 }

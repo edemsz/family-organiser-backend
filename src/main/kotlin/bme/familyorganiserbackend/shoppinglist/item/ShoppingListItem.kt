@@ -22,5 +22,8 @@ class ShoppingListItem() {
 
     @ManyToOne
     lateinit var shoppingList:ShoppingList
+
+    @Column
+    var purchased:Boolean=false
 }
 

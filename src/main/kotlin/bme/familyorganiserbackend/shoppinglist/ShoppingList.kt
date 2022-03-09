@@ -2,6 +2,7 @@ package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.shoppinglist.item.ShoppingListItem
+import java.time.LocalDate
 import javax.persistence.*
 
 
@@ -23,4 +24,10 @@ class ShoppingList() {
 
     @OneToMany(mappedBy = "shoppingList", cascade= arrayOf(CascadeType.MERGE))
     var items:List<ShoppingListItem>?=null
+
+    @Column
+    lateinit var location:String
+
+    @Column
+    lateinit var completedOn:LocalDate
 }
