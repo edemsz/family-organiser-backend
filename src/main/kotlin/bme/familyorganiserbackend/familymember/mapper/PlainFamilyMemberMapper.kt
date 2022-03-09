@@ -3,13 +3,12 @@ package bme.familyorganiserbackend.familymember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import org.mapstruct.Mapper
 import org.mapstruct.factory.Mappers
-import org.springframework.beans.factory.annotation.Autowired
 
 
 @Mapper
 interface PlainFamilyMemberMapper {
     fun PlainToEntity(plain: FamilyMemberPlain):FamilyMember
-    fun EntityToPlain(entity:FamilyMember): FamilyMemberPlain
+    fun EntityToPlain(member:FamilyMember?): FamilyMemberPlain?
     companion object {
         val INSTANCE: PlainFamilyMemberMapper
             get() = Mappers.getMapper(PlainFamilyMemberMapper::class.java)
@@ -30,9 +29,11 @@ class PlainFamilyMemberMapperImpl:PlainFamilyMemberMapper{
         return member
     }
 
-    override fun EntityToPlain(entity: FamilyMember): FamilyMemberPlain {
-        val plain= FamilyMemberPlain(entity.id,entity.surname,entity.lastName,entity.email
-            ,entity.photo,entity.birthDate,entity.family?.id,entity.uid,entity.username)
+    override fun EntityToPlain(member: FamilyMember?): FamilyMemberPlain? {
+        if(member==null)
+            return null
+        val plain= FamilyMemberPlain(member.id,member.surname,member.lastName,member.email
+            ,member.photo,member.birthDate,member.family?.id,member.uid,member.username)
         return plain
     }
 }

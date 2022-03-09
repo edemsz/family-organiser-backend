@@ -26,7 +26,6 @@ class DataLoader @Autowired constructor
         val fm1=FamilyMember("user1","user","user@user.hu",null,LocalDate.of(1994,2,12),family1)
         val fm2=FamilyMember("user2","user","user2@user.hu",null, LocalDate.of(1996,4,2),family1)
         val fm3=FamilyMember("user3","user","user3@user.hu",null, LocalDate.of(1999,11,22),family1)
-        family1.head=fm1
         familyRepository.save(family1)
 
         val family2= Family("family 2")
@@ -37,16 +36,18 @@ class DataLoader @Autowired constructor
         familyMemberRepository.save(fm2)
         familyMemberRepository.save(fm3)
         familyMemberRepository.save(fm4)
+        family1.head=fm1
+        familyRepository.save(family1)
 
         val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
 
         val fm1DTO=mapper.EntityToPlain(fm1)
-        println(fm1DTO.id)
-        println(fm1DTO.lastName)
-        println(fm1DTO.surname)
-        println(fm1DTO.uid)
-        println(fm1DTO.username)
-        println(fm1DTO.email)
+        println(fm1DTO?.id)
+        println(fm1DTO?.lastName)
+        println(fm1DTO?.surname)
+        println(fm1DTO?.uid)
+        println(fm1DTO?.username)
+        println(fm1DTO?.email)
     }
 
 }
