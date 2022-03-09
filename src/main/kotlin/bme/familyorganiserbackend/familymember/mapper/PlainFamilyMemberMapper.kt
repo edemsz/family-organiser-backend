@@ -7,8 +7,7 @@ import org.mapstruct.factory.Mappers
 
 @Mapper
 interface PlainFamilyMemberMapper {
-    fun PlainToEntity(plain: FamilyMemberPlain):FamilyMember
-    fun EntityToPlain(member:FamilyMember?): FamilyMemberPlain?
+    fun entityToPlain(member:FamilyMember?): FamilyMemberPlain?
     companion object {
         val INSTANCE: PlainFamilyMemberMapper
             get() = Mappers.getMapper(PlainFamilyMemberMapper::class.java)
@@ -16,20 +15,9 @@ interface PlainFamilyMemberMapper {
 }
 
 class PlainFamilyMemberMapperImpl:PlainFamilyMemberMapper{
-    override fun PlainToEntity(plain: FamilyMemberPlain): FamilyMember {
-        val member=FamilyMember()
-        member.surname=plain.surname
-        member.lastName=plain.lastName
-        member.surname=plain.surname
-        member.uid=plain.uid
-        member.email=plain.email
-        member.username=plain.username
-        member.photo=plain.photo
-        member.birthDate=plain.birthDate
-        return member
-    }
 
-    override fun EntityToPlain(member: FamilyMember?): FamilyMemberPlain? {
+
+    override fun entityToPlain(member: FamilyMember?): FamilyMemberPlain? {
         if(member==null)
             return null
         val plain= FamilyMemberPlain(member.id,member.surname,member.lastName,member.email

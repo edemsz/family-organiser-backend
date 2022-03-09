@@ -15,6 +15,4 @@ class CreateFamilyMember {
 
     var familyId:Long?=null
 
-    lateinit var uid:String
-
 }

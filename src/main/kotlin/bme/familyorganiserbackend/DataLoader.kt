@@ -5,13 +5,11 @@ import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.FamilyMemberRepository
 import bme.familyorganiserbackend.familymember.FamilyRepository
 import bme.familyorganiserbackend.familymember.PlainFamilyMemberMapper
-import org.mapstruct.factory.Mappers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
 import java.time.LocalDate
-import java.util.*
 
 @Component
 class DataLoader @Autowired constructor
@@ -41,7 +39,7 @@ class DataLoader @Autowired constructor
 
         val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
 
-        val fm1DTO=mapper.EntityToPlain(fm1)
+        val fm1DTO=mapper.entityToPlain(fm1)
         println(fm1DTO?.id)
         println(fm1DTO?.lastName)
         println(fm1DTO?.surname)

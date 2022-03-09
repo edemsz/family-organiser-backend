@@ -20,9 +20,9 @@ class PlainFamilyMapperImpl:PlainFamilyMapper{
             null
         else {
             val plainFamilyMemberMapper =PlainFamilyMemberMapper.INSTANCE
-            val headPlain=plainFamilyMemberMapper.EntityToPlain(family.head)
+            val headPlain=plainFamilyMemberMapper.entityToPlain(family.head)
             val membersPlain=family.members
-                ?.map{ plainFamilyMemberMapper.EntityToPlain(it) }
+                ?.map{ plainFamilyMemberMapper.entityToPlain(it) }
             val dto = FamilyPlain(
                 family.id, family.name,
                 headPlain, membersPlain, family.code
