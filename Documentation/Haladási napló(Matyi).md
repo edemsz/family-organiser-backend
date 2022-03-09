@@ -18,3 +18,11 @@ Ezeken kívül folytattam a JetPack-al való ismerkedést, az alkalmazásomhoz k
 
 A héten még egyeztettem Ádámmal arról, hogy a múltheti konzultáción megbeszéltek alapján hogyan módosítjuk a kezdeti elképzeléseinket. 
 
+### 4.-ik hétre
+- Átolvastam Ádám kommunikációs protokoll leírását
+- Refaktoráltam/újragondoltam a projektem felépítését, készítettem egy "komponensek" mappát, és ide kiszerveztem a nézet újrafelhasználható elemeit.
+- Készítettem egy CreateFamily nézetet, ide az alapvető adatokon kívül egy fénykép feltöltésére is van lehetőség
+- Elkészítettem a család fő nézetének egy "béta" változatát
+- Az android programozás közben pedig tovább ismerkedtem a JetPack-el
+
+
