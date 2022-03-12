@@ -3,8 +3,7 @@ package bme.familyorganiserbackend.familymember
 import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberGet
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
-import bme.familyorganiserbackend.familymember.mapper.CreateFamilyMemberMapper
-import bme.familyorganiserbackend.familymember.mapper.GetFamilyMemberMapper
+import bme.familyorganiserbackend.familymember.mapper.PlainFamilyMemberMapper
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
@@ -17,7 +16,7 @@ class FamilyMemberController(private val service: FamilyMemberService) {
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
     fun getMembers(): ResponseEntity<List<FamilyMemberPlain?>> {
-        val m=PlainFamilyMemberMapper.INSTANCE
+        val m= PlainFamilyMemberMapper.INSTANCE
 
         val members:List<FamilyMember> =service.getMembers()
         val memberDtos=members.map { m.entityToPlain(it) }

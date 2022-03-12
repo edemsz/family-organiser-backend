@@ -2,7 +2,7 @@ package bme.familyorganiserbackend.family.mapper
 
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.family.FamilyPlain
-import bme.familyorganiserbackend.familymember.PlainFamilyMemberMapper
+import bme.familyorganiserbackend.familymember.mapper.PlainFamilyMemberMapper
 import org.mapstruct.factory.Mappers
 
 interface PlainFamilyMapper {
@@ -19,7 +19,7 @@ class PlainFamilyMapperImpl:PlainFamilyMapper{
         return if (family==null)
             null
         else {
-            val plainFamilyMemberMapper =PlainFamilyMemberMapper.INSTANCE
+            val plainFamilyMemberMapper = PlainFamilyMemberMapper.INSTANCE
             val headPlain=plainFamilyMemberMapper.entityToPlain(family.head)
             val membersPlain=family.members
                 ?.map{ plainFamilyMemberMapper.entityToPlain(it) }

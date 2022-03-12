@@ -1,7 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.family.Family
-import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDate
