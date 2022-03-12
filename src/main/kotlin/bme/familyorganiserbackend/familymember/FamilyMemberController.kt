@@ -4,7 +4,6 @@ import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberGet
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import bme.familyorganiserbackend.familymember.mapper.CreateFamilyMemberMapper
-import bme.familyorganiserbackend.familymember.mapper.CreateFamilyMemberMapperImpl
 import bme.familyorganiserbackend.familymember.mapper.GetFamilyMemberMapper
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
@@ -15,23 +14,25 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/family-member")
 class FamilyMemberController(private val service: FamilyMemberService) {
-    val getMapper=GetFamilyMemberMapper.INSTANCE
-    val createMapper= CreateFamilyMemberMapper.INSTANCE
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
-    fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
+    fun getMembers(): ResponseEntity<List<FamilyMemberPlain?>> {
+        val m=PlainFamilyMemberMapper.INSTANCE
+
         val members:List<FamilyMember> =service.getMembers()
-        val memberDtos=members.map { getMapper.entityToGet(it) }
+        val memberDtos=members.map { m.entityToPlain(it) }
         return ResponseEntity.ok(memberDtos)
     }
 
     @PostMapping
     @ApiOperation(value = "Adds a family member.")
     fun addMember(@RequestBody memberDto: CreateFamilyMember): ResponseEntity<FamilyMemberGet> {
-        val member=createMapper.CreateDTOToEntity(memberDto)
+        throw NotImplementedError()
+
+        /*val member=createMapper.CreateDTOToEntity(memberDto)
         val addedMember=service.addMember(member)
         val getDTO=getMapper.entityToGet(addedMember)
-        return ResponseEntity.ok(getDTO)
+        return ResponseEntity.ok(getDTO)*/
     }
 
     @PutMapping("/{id}")

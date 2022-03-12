@@ -37,7 +37,7 @@ class DataLoader @Autowired constructor
         family1.head=fm1
         familyRepository.save(family1)
 
-        val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
+        /*val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
 
         val fm1DTO=mapper.entityToPlain(fm1)
         println(fm1DTO?.id)
@@ -45,7 +45,7 @@ class DataLoader @Autowired constructor
         println(fm1DTO?.surname)
         println(fm1DTO?.uid)
         println(fm1DTO?.username)
-        println(fm1DTO?.email)
+        println(fm1DTO?.email)*/
     }
 
 }

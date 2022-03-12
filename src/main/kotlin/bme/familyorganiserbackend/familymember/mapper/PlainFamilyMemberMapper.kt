@@ -14,14 +14,3 @@ interface PlainFamilyMemberMapper {
     }
 }
 
-class PlainFamilyMemberMapperImpl:PlainFamilyMemberMapper{
-
-
-    override fun entityToPlain(member: FamilyMember?): FamilyMemberPlain? {
-        if(member==null)
-            return null
-        val plain= FamilyMemberPlain(member.id,member.surname,member.lastName,member.email
-            ,member.photo,member.birthDate,member.family?.id,member.uid,member.username)
-        return plain
-    }
-}

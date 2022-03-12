@@ -6,7 +6,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 
 @SpringBootApplication
 @EnableSwagger2
-class FamilyOrganiserBackendApplication
+open class FamilyOrganiserBackendApplication
 
 fun main(args: Array<String>) {
     runApplication<FamilyOrganiserBackendApplication>(*args)

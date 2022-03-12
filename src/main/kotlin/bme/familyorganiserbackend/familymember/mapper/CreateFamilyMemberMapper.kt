@@ -19,20 +19,3 @@ interface CreateFamilyMemberMapper {
     }
 }
 
-class CreateFamilyMemberMapperImpl:CreateFamilyMemberMapper{
-    @Autowired
-    private lateinit var familyRepository:FamilyRepository
-    override fun CreateDTOToEntity(createDto:CreateFamilyMember): FamilyMember {
-        val member=FamilyMember()
-        member.lastName=createDto.lastName
-        member.surname=createDto.surname
-        member.birthDate=createDto.birthDate
-        member.email=createDto.email
-        member.photo=createDto.photo
-        if(createDto.familyId!=null)
-            member.family=familyRepository.getById(createDto.familyId!!)
-        return member
-    }
-
-
-}
