@@ -13,10 +13,15 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>family-organiser-backend</name>
     <description>Demo project for Spring Boot</description>
+
+
     <properties>
-        <java.version>11</java.version>
+        <spring.boot.maven.plugin.version>2.5.7</spring.boot.maven.plugin.version>
+        <java.version>14</java.version>
         <kotlin.version>1.6.10</kotlin.version>
     </properties>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -122,72 +127,55 @@
 
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-parent</artifactId>
+                    <version>${spring.boot.maven.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
 
 
             <plugin>
-
                 <groupId>org.apache.maven.plugins</groupId>
-
                 <artifactId>maven-compiler-plugin</artifactId>
-
-                <version>3.8.1</version>
-
-                <configuration>
-
-                    <target>${maven.compiler.target}</target>
-                    <source>${maven.compiler.source}</source>
-
-                    <annotationProcessorPaths>
-                        <path>
-
-                            <groupId>org.mapstruct</groupId>
-
-                            <artifactId>mapstruct-processor</artifactId>
-
-                            <version>1.4.2.Final</version>
-
-                        </path>
-
-                    </annotationProcessorPaths>
-
-                    <compilerArgs>
-
-                        <compilerArg>
-
-                            -Amapstruct.suppressGeneratorTimestamp=true
-
-                        </compilerArg>
-
-                        <compilerArg>
-
-                            -Amapstruct.suppressGeneratorVersionInfoComment=true
-
-                        </compilerArg>
-
-                    </compilerArgs>
-
-                </configuration>
-
+                <executions>
+                    <!-- Replacing default-compile as it is treated specially by maven -->
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <!-- Replacing default-testCompile as it is treated specially by maven -->
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>java-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>java-test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
 
 
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
+
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -216,7 +204,7 @@
                     </execution>
                     <execution>
                         <id>compile</id>
-                        <phase>compile</phase>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>compile</goal>
                         </goals>
