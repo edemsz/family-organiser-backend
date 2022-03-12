@@ -1,5 +1,8 @@
 package bme.familyorganiserbackend.family
 
+import bme.familyorganiserbackend.family.mapper.PlainFamilyMapper
+import bme.familyorganiserbackend.familymember.FamilyMember
+import bme.familyorganiserbackend.familymember.mapper.PlainFamilyMemberMapper
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -9,8 +12,12 @@ import org.springframework.web.bind.annotation.*
 class FamilyController(private val service: FamilyService) {
     @GetMapping
     @ApiOperation(value = " Gets all families.")
-    fun getFamilies(): ResponseEntity<List<FamilyPlain>> {
-        throw NotImplementedError()
+    fun getFamilies(): ResponseEntity<List<FamilyPlain?>> {
+        val m= PlainFamilyMapper.INSTANCE
+
+        val families:List<Family> =service.getFamilies()
+        val familyDtos=families.map { m.entityToPlain(it) }
+        return ResponseEntity.ok(familyDtos)
     }
     @PostMapping
     @ApiOperation(value = "Adds a family.")

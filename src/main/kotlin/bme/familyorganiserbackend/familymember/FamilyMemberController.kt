@@ -1,9 +1,11 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.ResourceNotFoundException
 import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberGet
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
-import bme.familyorganiserbackend.familymember.mapper.PlainFamilyMemberMapper
+import bme.familyorganiserbackend.familymember.mapper.CreateFamilyMemberMapper
+import bme.familyorganiserbackend.familymember.mapper.GetFamilyMemberMapper
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
@@ -13,25 +15,30 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/family-member")
 class FamilyMemberController(private val service: FamilyMemberService) {
+    private val getMapper= GetFamilyMemberMapper.INSTANCE
+    private val createMapper= CreateFamilyMemberMapper.INSTANCE
+
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
-    fun getMembers(): ResponseEntity<List<FamilyMemberPlain?>> {
-        val m= PlainFamilyMemberMapper.INSTANCE
+    fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
 
         val members:List<FamilyMember> =service.getMembers()
-        val memberDtos=members.map { m.entityToPlain(it) }
+        val memberDtos=getMapper.listOfMembersToGet(members)
         return ResponseEntity.ok(memberDtos)
     }
 
     @PostMapping
     @ApiOperation(value = "Adds a family member.")
     fun addMember(@RequestBody memberDto: CreateFamilyMember): ResponseEntity<FamilyMemberGet> {
-        throw NotImplementedError()
-
-        /*val member=createMapper.CreateDTOToEntity(memberDto)
-        val addedMember=service.addMember(member)
-        val getDTO=getMapper.entityToGet(addedMember)
-        return ResponseEntity.ok(getDTO)*/
+        try{
+            val member = createMapper.CreateDTOToEntity(memberDto)
+            val addedMember = service.addMember(member)
+            val getDTO = getMapper.entityToGet(addedMember)
+            return ResponseEntity.ok(getDTO)
+        }
+        catch (e:Exception){
+            throw ResourceNotFoundException()
+        }
     }
 
     @PutMapping("/{id}")
@@ -40,20 +47,45 @@ class FamilyMemberController(private val service: FamilyMemberService) {
                          , @RequestBody  member: CreateFamilyMember
     ) : ResponseEntity<FamilyMemberGet>
     {
-        throw NotImplementedError()
+        try {
+            val member = createMapper.CreateDTOToEntity(member)
+
+            val addedMember = service.updateMember(id, member)
+
+            val getDTO = getMapper.entityToGet(addedMember)
+
+            return ResponseEntity.ok(getDTO)
+        }
+        catch(e:Exception) {
+            throw ResourceNotFoundException()
+        }
 
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value ="Gets the data of the member by the ID.")
-    fun getMemberById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberGet>{
-        throw NotImplementedError()
+    fun getMemberById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberGet>
+    {
+        try {
+            return ResponseEntity.ok(getMapper.entityToGet(service.getMemberById(id)!!))
+        }
+        catch (e:Exception){
+            throw ResourceNotFoundException()
+        }
     }
+
 
     @DeleteMapping("/{id}")
     @ApiOperation(value ="Deletes the member by the ID.")
-    fun deleteById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberPlain>{
-        throw NotImplementedError()
+    fun deleteById(@PathVariable(value="id") id: Long):ResponseEntity<FamilyMemberGet>{
+        try {
+            val memberDeleted=getMapper.entityToGet(service.getMemberById(id)!!)
+            service.deleteMember(id)
+            return ResponseEntity.ok(memberDeleted)
+        }
+        catch (e:Exception){
+            throw ResourceNotFoundException()
+        }
     }
 
     @PostMapping("/register")

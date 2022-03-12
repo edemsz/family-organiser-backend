@@ -11,6 +11,7 @@ import javax.persistence.*
 class FamilyMember() {
 
 
+
     constructor(
         surname:String, lastName:String,
         email:String, photo:String?, birthDate: LocalDate?, family:Family?) : this() {
@@ -66,5 +67,11 @@ class FamilyMember() {
     @Column(nullable = false, name = "user_id")
     lateinit var uid:String
 
+    @PreRemove
+    private fun removeHeadFromFamily(){
+        if(this.family?.head==this){
+            this.family?.head=null
+        }
+    }
 
 }
