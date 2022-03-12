@@ -76,7 +76,9 @@ open class FamilyMemberServiceTest @Autowired constructor
         assertEquals(memberFromRepo.lastName,LAST_NAME)
         assertEquals(memberFromRepo.username,USERNAME)
         assertNotNull(memberFromRepo.uid)
+
     }
+
     @Test
     fun serviceUpdateTest(){
         dataLoad()
