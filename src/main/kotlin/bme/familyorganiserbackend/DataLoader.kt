@@ -18,7 +18,7 @@ class DataLoader @Autowired constructor
 {
 
     override fun run(args: ApplicationArguments?) {
-        val family1= Family("family 1")
+        /*val family1= Family("family 1")
         familyRepository.save(family1)
         val fm1=FamilyMember("user1","user","user@user.hu",null,LocalDate.of(1994,2,12),family1)
         val fm2=FamilyMember("user2","user","user2@user.hu",null, LocalDate.of(1996,4,2),family1)
@@ -34,7 +34,7 @@ class DataLoader @Autowired constructor
         familyMemberRepository.save(fm3)
         familyMemberRepository.save(fm4)
         family1.head=fm1
-        familyRepository.save(family1)
+        familyRepository.save(family1)*/
 
         /*val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
 

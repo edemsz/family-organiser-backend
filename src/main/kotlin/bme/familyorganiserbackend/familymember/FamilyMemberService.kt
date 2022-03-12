@@ -1,20 +1,31 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.ResourceNotFoundException
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 
 @Service
-class FamilyMemberService(private val repository: FamilyMemberRepository) {
+@Transactional
+open class FamilyMemberService(private val repository: FamilyMemberRepository) {
     fun getMembers(): List<FamilyMember> = repository.findAll()
 
-    fun addMember(member: FamilyMember): FamilyMember = repository.save(member)
+    fun addMember(member: FamilyMember):FamilyMember {
+         return repository.save(member.setUid())
+    }
 
     fun getMemberById(id: Long): FamilyMember? =
         repository.findById(id).orElse(null)
 
     fun updateMember(id: Long, newMember: FamilyMember): FamilyMember {
-        throw NotFoundException()
+        val persistedMember=repository.getById(id)
+        if(id!=persistedMember.id){
+            throw ResourceNotFoundException()
+        }
+        return repository.save(newMember)
+
+
     }
 
 

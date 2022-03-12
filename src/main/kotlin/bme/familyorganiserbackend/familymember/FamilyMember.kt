@@ -23,7 +23,7 @@ class FamilyMember() {
         this.family=family
         this.setUid()
     }
-    private fun setUid() {
+    public fun setUid():FamilyMember {
         val STRING_LENGTH=10
         val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
         val randomString = (1..STRING_LENGTH)
@@ -31,6 +31,7 @@ class FamilyMember() {
             .map(charPool::get)
             .joinToString("")
         this.uid=randomString
+        return this
     }
 
     @Id
