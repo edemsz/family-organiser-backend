@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 abstract class AbstractService<Entity:AbstractEntity> : IBaseService<Entity>
 {
     @Autowired
-    private lateinit var dao:DAO<Entity>
+    protected lateinit var dao:DAO<Entity>
 
     override fun getAll(): List<Entity> = dao.findAll()
     override fun getById(id: Long): Entity? = dao.findById(id).orElse(null)
@@ -14,9 +14,9 @@ abstract class AbstractService<Entity:AbstractEntity> : IBaseService<Entity>
     override fun add(e: Entity): Entity = dao.save(e)
 
     override fun updateById(id: Long, entity: Entity): Entity {
-        if (id != entity?.id) {
+        /*if (id != entity?.id) {
             throw ResourceNotFoundException()
-        }
+        }*/
         entity.id = id
         return dao.save(entity)
     }

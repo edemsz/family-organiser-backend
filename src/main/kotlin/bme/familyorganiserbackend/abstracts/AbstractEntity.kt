@@ -10,4 +10,6 @@ abstract class AbstractEntity {
     @Column(name = "id", nullable = false)
     var id: Long = 0
 
+
+
 }

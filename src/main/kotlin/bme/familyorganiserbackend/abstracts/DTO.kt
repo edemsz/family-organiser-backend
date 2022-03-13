@@ -2,6 +2,6 @@ package bme.familyorganiserbackend.abstracts
 
 abstract class DTO <Base:AbstractEntity>
 
-abstract class GetDTO<Entity:AbstractEntity> :DTO<Entity>()
+abstract class AbstractGetDTO<Entity:AbstractEntity> :DTO<Entity>()
 
-abstract class CreateDTO<Entity:AbstractEntity> :DTO<Entity>()
+abstract class AbstractCreateDTO<Entity:AbstractEntity> :DTO<Entity>()

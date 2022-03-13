@@ -3,7 +3,7 @@ package bme.familyorganiserbackend
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.FamilyMemberRepository
-import bme.familyorganiserbackend.familymember.FamilyRepository
+import bme.familyorganiserbackend.family.FamilyRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner

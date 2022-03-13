@@ -14,6 +14,11 @@ constructor() : AbstractService<FamilyMember>() {
         return super.add(e)
     }
 
+    override fun updateById(id: Long, entity: FamilyMember): FamilyMember {
+        entity.uid=dao.getById(id).uid
+        return super.updateById(id, entity)
+    }
+
 
 
 }

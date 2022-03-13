@@ -1,91 +1,22 @@
 package bme.familyorganiserbackend.familymember
 
-import bme.familyorganiserbackend.ResourceNotFoundException
+import bme.familyorganiserbackend.abstracts.AbstractController
 import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberGet
-import bme.familyorganiserbackend.familymember.mapper.CreateFamilyMemberMapper
-import bme.familyorganiserbackend.familymember.mapper.GetFamilyMemberMapper
 import bme.familyorganiserbackend.security.LoginDTO
 import bme.familyorganiserbackend.security.Tokens
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/family-member")
-class FamilyMemberController
-    (
-        private val service: FamilyMemberService,
-        private val getMapper:GetFamilyMemberMapper,
-        private val createMapper:CreateFamilyMemberMapper,
-    ) {
-
-    @GetMapping
-    @ApiOperation(value = " Gets all family members.")
-    fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
-        val members: List<FamilyMember> = service.getAll()
-        val memberDtos = getMapper.listOfEntitiesToDtos(members)
-        return ResponseEntity.ok(memberDtos)
-    }
-
-    @PostMapping
-    @ApiOperation(value = "Adds a family member.")
-    fun addMember(@RequestBody memberDto: CreateFamilyMember): ResponseEntity<FamilyMemberGet> {
-
-        try {
-            val member = createMapper.dtoToEntity(memberDto)
-            val addedMember = service.add(member)
-            val getDTO = getMapper.entityToDto(addedMember)
-            return ResponseEntity.ok(getDTO)
-        } catch (e: Exception) {
-            throw ResourceNotFoundException()
-        }
-    }
-
-    @PutMapping("/{id}")
-    @ApiOperation(value = "Updates the data of a family member.")
-    fun updateMemberById(
-        @PathVariable(value = "id") id: Long, @RequestBody memberDto: CreateFamilyMember
-    ): ResponseEntity<FamilyMemberGet> {
-
-        try {
-            val member = createMapper.dtoToEntity(memberDto)
-
-            val addedMember = service.updateById(id, member)
-
-            val getDTO = getMapper.entityToDto(addedMember)
-
-            return ResponseEntity.ok(getDTO)
-        } catch (e: Exception) {
-            throw ResourceNotFoundException()
-        }
-
-    }
-
-    @GetMapping("/{id}")
-    @ApiOperation(value = "Gets the data of the member by the ID.")
-    fun getMemberById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
-        try {
-            return ResponseEntity.ok(getMapper.entityToDto(service.getById(id)!!))
-        } catch (e: Exception) {
-            throw ResourceNotFoundException()
-        }
-
-    }
-
-
-    @DeleteMapping("/{id}")
-    @ApiOperation(value = "Deletes the member by the ID.")
-    fun deleteById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
-        try {
-            val memberDeleted = getMapper.entityToDto(service.getById(id)!!)
-            service.deleteById(id)
-            return ResponseEntity.ok(memberDeleted)
-        } catch (e: Exception) {
-            throw ResourceNotFoundException()
-        }
-
-    }
+class FamilyMemberController:
+    AbstractController<FamilyMember, CreateFamilyMember,FamilyMemberGet>()
+     {
 
     @PostMapping("/register")
     @ApiOperation("Sign up method for users")

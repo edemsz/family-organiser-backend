@@ -1,6 +1,7 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.family.Family
+import bme.familyorganiserbackend.family.FamilyRepository
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -85,6 +86,7 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun serviceUpdateTest() {
+
         dataLoad()
         val initialMemberCount = familyMemberRepository.count()
         var family2 = familyRepository.getById(2)
@@ -100,6 +102,7 @@ open class FamilyMemberServiceTest @Autowired constructor
         assertEquals("-", updatedMember.photo)
         assertEquals(LocalDate.of(1951, 1, 30), updatedMember.birthDate)
         assertEquals(2, updatedMember.family?.id)
+
         family2 = familyRepository.getById(2)
         val memberFromRepo = familyMemberRepository.findById(3)
         val memberCount = familyMemberRepository.count()

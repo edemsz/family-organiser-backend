@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.familymember.dto
 
-import bme.familyorganiserbackend.abstracts.GetDTO
+import bme.familyorganiserbackend.abstracts.AbstractGetDTO
 import bme.familyorganiserbackend.familymember.FamilyMember
 import java.time.LocalDate
 
@@ -14,6 +14,6 @@ data class FamilyMemberPlain (
     var familyId:Long?=null,
     var uid:String,
     var username:String?=null
-): GetDTO<FamilyMember>()
+): AbstractGetDTO<FamilyMember>()
 
 

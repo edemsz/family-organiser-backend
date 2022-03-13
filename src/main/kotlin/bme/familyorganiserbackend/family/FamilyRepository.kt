@@ -1,10 +1,9 @@
-package bme.familyorganiserbackend.familymember
+package bme.familyorganiserbackend.family
 
-import bme.familyorganiserbackend.family.Family
-import org.springframework.data.jpa.repository.JpaRepository
+import bme.familyorganiserbackend.abstracts.DAO
 import org.springframework.stereotype.Repository
 import javax.transaction.Transactional
 
 @Repository
 @Transactional(Transactional.TxType.MANDATORY)
-interface FamilyRepository : JpaRepository<Family,Long>
+interface FamilyRepository : DAO<Family>
