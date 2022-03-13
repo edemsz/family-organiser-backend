@@ -1,13 +1,11 @@
-package bme.familyorganiserbackend.familymember.mapper
+package bme.familyorganiserbackend.family.mapper
 
 import bme.familyorganiserbackend.abstracts.AbstractCreateMapper
+import bme.familyorganiserbackend.family.CreateFamily
+import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.dto.CreateFamilyMember
 import org.mapstruct.Mapper
-import org.mapstruct.factory.Mappers
-
 
 @Mapper(componentModel = "spring")
-abstract class CreateFamilyMemberMapper : AbstractCreateMapper<FamilyMember, CreateFamilyMember>() {
-}
-
+abstract class CreateFamilyMapper : AbstractCreateMapper<Family, CreateFamily>()
