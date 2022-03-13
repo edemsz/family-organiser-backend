@@ -1,6 +1,7 @@
-package bme.familyorganiserbackend.family
+package bme.familyorganiserbackend.family.dto
 
 import bme.familyorganiserbackend.abstracts.CreateDTO
+import bme.familyorganiserbackend.family.Family
 
 data class CreateFamily (
     var name: String,

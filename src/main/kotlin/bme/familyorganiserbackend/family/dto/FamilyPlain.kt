@@ -1,6 +1,7 @@
-package bme.familyorganiserbackend.family
+package bme.familyorganiserbackend.family.dto
 
 import bme.familyorganiserbackend.abstracts.GetDTO
+import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 
 data class FamilyPlain (

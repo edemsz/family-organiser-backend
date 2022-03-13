@@ -2,7 +2,7 @@ package bme.familyorganiserbackend.family.mapper
 
 import bme.familyorganiserbackend.abstracts.AbstractGetMapper
 import bme.familyorganiserbackend.family.Family
-import bme.familyorganiserbackend.family.FamilyPlain
+import bme.familyorganiserbackend.family.dto.FamilyPlain
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import org.mapstruct.Mapper
@@ -15,9 +15,5 @@ abstract class PlainFamilyMapper : AbstractGetMapper<Family, FamilyPlain>() {
     @Mapping(target = "familyId", source = "member.family.id")
     abstract fun memberToPlain(member: FamilyMember?): FamilyMemberPlain?
 
-    companion object {
-        val INSTANCE: PlainFamilyMapper
-            get() = Mappers.getMapper(PlainFamilyMapper::class.java)
-    }
 }
 

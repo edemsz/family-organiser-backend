@@ -23,7 +23,7 @@ class FamilyMemberController
     @GetMapping
     @ApiOperation(value = " Gets all family members.")
     fun getMembers(): ResponseEntity<List<FamilyMemberGet>> {
-        val members: List<FamilyMember> = service.getMembers()
+        val members: List<FamilyMember> = service.getAll()
         val memberDtos = getMapper.listOfEntitiesToDtos(members)
         return ResponseEntity.ok(memberDtos)
     }
@@ -34,7 +34,7 @@ class FamilyMemberController
 
         try {
             val member = createMapper.dtoToEntity(memberDto)
-            val addedMember = service.addMember(member)
+            val addedMember = service.add(member)
             val getDTO = getMapper.entityToDto(addedMember)
             return ResponseEntity.ok(getDTO)
         } catch (e: Exception) {
@@ -51,7 +51,7 @@ class FamilyMemberController
         try {
             val member = createMapper.dtoToEntity(memberDto)
 
-            val addedMember = service.updateMember(id, member)
+            val addedMember = service.updateById(id, member)
 
             val getDTO = getMapper.entityToDto(addedMember)
 
@@ -66,7 +66,7 @@ class FamilyMemberController
     @ApiOperation(value = "Gets the data of the member by the ID.")
     fun getMemberById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
         try {
-            return ResponseEntity.ok(getMapper.entityToDto(service.getMemberById(id)!!))
+            return ResponseEntity.ok(getMapper.entityToDto(service.getById(id)!!))
         } catch (e: Exception) {
             throw ResourceNotFoundException()
         }
@@ -78,8 +78,8 @@ class FamilyMemberController
     @ApiOperation(value = "Deletes the member by the ID.")
     fun deleteById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
         try {
-            val memberDeleted = getMapper.entityToDto(service.getMemberById(id)!!)
-            service.deleteMember(id)
+            val memberDeleted = getMapper.entityToDto(service.getById(id)!!)
+            service.deleteById(id)
             return ResponseEntity.ok(memberDeleted)
         } catch (e: Exception) {
             throw ResourceNotFoundException()

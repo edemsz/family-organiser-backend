@@ -41,12 +41,12 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun repoEntityEqualsServiceEntity() {
-        assertEquals(familyMemberService.getMembers().size, familyMemberRepository.findAll().size)
+        assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         dataLoad()
-        assertEquals(familyMemberService.getMembers().size, familyMemberRepository.findAll().size)
+        assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         for (i in -3L..10L) {
             val memberFromRepo = familyMemberRepository.findById(i)
-            val memberFromService = familyMemberService.getMemberById(i)
+            val memberFromService = familyMemberService.getById(i)
             if (memberFromRepo.isEmpty)
                 assertNull(memberFromService)
             else {
@@ -59,7 +59,7 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun serviceInsertTest() {
-        assertEquals(familyMemberService.getMembers().size, familyMemberRepository.findAll().size)
+        assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         val add = FamilyMember()
         val EMAIL = "test@gmail.com"
         val LAST_NAME = "ln"
@@ -71,8 +71,8 @@ open class FamilyMemberServiceTest @Autowired constructor
         add.lastName = LAST_NAME
         add.surname = SURNAME
         add.username = USERNAME
-        familyMemberService.addMember(add)
-        assertEquals(familyMemberService.getMembers().size, familyMemberRepository.findAll().size)
+        familyMemberService.add(add)
+        assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         val memberFromRepo = familyMemberRepository.findById(familyMemberRepository.count()).get()
         assertEquals(memberFromRepo.email, EMAIL)
         assertEquals(memberFromRepo.birthDate, BIRTHDATE)
@@ -92,7 +92,7 @@ open class FamilyMemberServiceTest @Autowired constructor
         assertNotNull(initialUid)
 
         val update = FamilyMember("Phil", "Collins", "phil@collins.com", "-", LocalDate.of(1951, 1, 30), family2)
-        val updatedMember = familyMemberService.updateMember(3, update)
+        val updatedMember = familyMemberService.updateById(3, update)
         assertNotEquals("user3", updatedMember.surname)
         assertEquals("Phil", updatedMember.surname)
         assertEquals("Collins", updatedMember.lastName)

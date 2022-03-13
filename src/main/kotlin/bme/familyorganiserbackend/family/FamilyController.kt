@@ -1,5 +1,7 @@
 package bme.familyorganiserbackend.family
 
+import bme.familyorganiserbackend.family.dto.CreateFamily
+import bme.familyorganiserbackend.family.dto.FamilyPlain
 import bme.familyorganiserbackend.family.mapper.PlainFamilyMapper
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
