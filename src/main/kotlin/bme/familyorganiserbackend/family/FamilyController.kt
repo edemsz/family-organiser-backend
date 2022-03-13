@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*
 class FamilyController
     (
     private val service: FamilyService,
-    //private val plainFamilyMapper: PlainFamilyMapper
+    private val plainFamilyMapper: PlainFamilyMapper
 ) {
     @GetMapping
-    @ApiOperation(value = " Gets all families.")
+    @ApiOperation(value = "Gets all families.")
     fun getFamilies(): ResponseEntity<List<FamilyPlain?>> {
-        val plainFamilyMapper = PlainFamilyMapper.INSTANCE
+        //val plainFamilyMapper = PlainFamilyMapper.INSTANCE
 
         val families: List<Family> = service.getFamilies()
         val familyDtos = plainFamilyMapper.listOfEntitiesToDtos(families)

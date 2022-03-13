@@ -1,5 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.abstracts.AbstractEntity
 import bme.familyorganiserbackend.family.Family
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
@@ -8,7 +9,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "FAMILY_MEMBERS")
-class FamilyMember() {
+class FamilyMember():AbstractEntity() {
 
 
     constructor(
@@ -35,9 +36,6 @@ class FamilyMember() {
         return this
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
 
     @Column(nullable = false)
     lateinit var surname: String
