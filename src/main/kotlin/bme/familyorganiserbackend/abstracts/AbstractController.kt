@@ -13,7 +13,7 @@ abstract class AbstractController<
         GetDTO:AbstractGetDTO<Entity>,
 > {
     @Autowired
-    protected lateinit var service: AbstractService<Entity>
+    protected open lateinit var service: AbstractService<Entity>
     @Autowired
     protected lateinit var getMapper: AbstractGetMapper<Entity, GetDTO>
     @Autowired

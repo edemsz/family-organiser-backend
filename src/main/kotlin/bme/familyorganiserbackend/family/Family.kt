@@ -28,9 +28,9 @@ class Family() : AbstractEntity() {
     @JoinColumn(name = "head_id", referencedColumnName = "id")
     var head: FamilyMember? = null
 
-    @OneToMany(mappedBy = "family", cascade = arrayOf(CascadeType.ALL))
+    @OneToMany(mappedBy = "family",cascade= arrayOf(CascadeType.MERGE))
     @JsonBackReference
-    var members: List<FamilyMember>? = null
+    var members:List<FamilyMember>?=null
 
     @OneToMany(mappedBy = "family", cascade = arrayOf(CascadeType.MERGE))
     var shoppingLists: List<ShoppingList>? = null

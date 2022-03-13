@@ -4,6 +4,7 @@ import bme.familyorganiserbackend.abstracts.AbstractController
 import bme.familyorganiserbackend.family.dto.CreateFamily
 import bme.familyorganiserbackend.family.dto.FamilyPlain
 import io.swagger.annotations.ApiOperation
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/family")
 class FamilyController:
     AbstractController<Family, CreateFamily, FamilyPlain>()
-   {
+{
+    @Autowired
+    lateinit var familyService:FamilyService
 
     @PostMapping("/{id}/leave")
     @ApiOperation(value = "Endpoint for leaving the family")
@@ -22,14 +25,10 @@ class FamilyController:
     @PostMapping("/{id}/join")
     @ApiOperation(value = "Endpoint for joining the family")
     fun joinFamily(@PathVariable(value = "id") id: Long, @RequestParam memberId: Long): ResponseEntity<FamilyPlain> {
-        throw NotImplementedError()
+        val family=familyService.addMemberToFamily(id,memberId)
+        return ResponseEntity.ok(getMapper.entityToDto(family))
     }
 
-    @PostMapping("/{id}/add_member")
-    @ApiOperation(value = "Endpoint for joining the family")
-    fun addToFamily(@PathVariable(value = "id") id: Long, @RequestParam memberId: Long): ResponseEntity<FamilyPlain> {
-        throw NotImplementedError()
-    }
 
 
 }
