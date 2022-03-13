@@ -1,10 +1,10 @@
 package bme.familyorganiserbackend.family
 
 class CreateFamily {
-    lateinit var name:String
+    lateinit var name: String
 
-    var headId: Long?=null
+    var headId: Long? = null
 
-    var memberIds:List<Long?>?=null
+    var memberIds: List<Long?>? = null
 
 }

@@ -1,13 +1,14 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.ResourceNotFoundException
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 
 @Service
-@Transactional
-open class FamilyMemberService(private val repository: FamilyMemberRepository) {
+open class FamilyMemberService
+@Autowired
+constructor(private val repository: FamilyMemberRepository) {
     fun getMembers(): List<FamilyMember> = repository.findAll()
 
     fun addMember(member: FamilyMember): FamilyMember {

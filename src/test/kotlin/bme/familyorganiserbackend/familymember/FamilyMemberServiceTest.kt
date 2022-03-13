@@ -13,10 +13,10 @@ import java.time.LocalDate
 open class FamilyMemberServiceTest @Autowired constructor
     (
     private val familyMemberRepository: FamilyMemberRepository,
-    private val familyRepository: FamilyRepository
+    private val familyRepository: FamilyRepository,
+    private val familyMemberService: FamilyMemberService
 ) {
 
-    private val familyMemberService = FamilyMemberService(familyMemberRepository)
 
     private fun dataLoad() {
         var family1 = Family("family 1")
