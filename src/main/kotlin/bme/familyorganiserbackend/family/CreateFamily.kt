@@ -1,10 +1,9 @@
 package bme.familyorganiserbackend.family
 
-class CreateFamily {
-    lateinit var name: String
+import bme.familyorganiserbackend.abstracts.CreateDTO
 
-    var headId: Long? = null
-
-    var memberIds: List<Long?>? = null
-
-}
+data class CreateFamily (
+    var name: String,
+    var headId: Long? = null,
+    var memberIds: List<Long?>? = null,
+):CreateDTO<Family>()

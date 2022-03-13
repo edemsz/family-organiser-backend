@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.family.mapper
 
-import bme.familyorganiserbackend.abstracts.AbstractMapper
+import bme.familyorganiserbackend.abstracts.AbstractGetMapper
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.family.FamilyPlain
 import bme.familyorganiserbackend.familymember.FamilyMember
@@ -10,7 +10,7 @@ import org.mapstruct.Mapping
 import org.mapstruct.factory.Mappers
 
 @Mapper(componentModel = "spring")
-abstract class PlainFamilyMapper : AbstractMapper<Family, FamilyPlain>() {
+abstract class PlainFamilyMapper : AbstractGetMapper<Family, FamilyPlain>() {
 
     @Mapping(target = "familyId", source = "member.family.id")
     abstract fun memberToPlain(member: FamilyMember?): FamilyMemberPlain?

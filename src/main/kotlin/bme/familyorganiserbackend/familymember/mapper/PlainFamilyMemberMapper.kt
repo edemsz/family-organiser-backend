@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.familymember.mapper
 
-import bme.familyorganiserbackend.abstracts.AbstractMapper
+import bme.familyorganiserbackend.abstracts.AbstractGetMapper
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.dto.FamilyMemberPlain
 import org.mapstruct.Mapper
@@ -9,7 +9,7 @@ import org.mapstruct.factory.Mappers
 
 
 @Mapper(componentModel = "spring")
-abstract class PlainFamilyMemberMapper : AbstractMapper<FamilyMember, FamilyMemberPlain>() {
+abstract class PlainFamilyMemberMapper : AbstractGetMapper<FamilyMember, FamilyMemberPlain>() {
     @Mapping(target = "familyId", source = "entity.family.id")
     abstract override fun entityToDto(entity: FamilyMember): FamilyMemberPlain
 

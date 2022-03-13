@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.*
 class FamilyMemberController
     (
         private val service: FamilyMemberService,
-        private val getMapper:GetFamilyMemberMapper
+        private val getMapper:GetFamilyMemberMapper,
+        private val createMapper:CreateFamilyMemberMapper,
     ) {
 
     @GetMapping
@@ -30,16 +31,15 @@ class FamilyMemberController
     @PostMapping
     @ApiOperation(value = "Adds a family member.")
     fun addMember(@RequestBody memberDto: CreateFamilyMember): ResponseEntity<FamilyMemberGet> {
-        throw NotImplementedError()
 
-        /*try {
+        try {
             val member = createMapper.dtoToEntity(memberDto)
             val addedMember = service.addMember(member)
             val getDTO = getMapper.entityToDto(addedMember)
             return ResponseEntity.ok(getDTO)
         } catch (e: Exception) {
             throw ResourceNotFoundException()
-        }*/
+        }
     }
 
     @PutMapping("/{id}")
@@ -47,8 +47,7 @@ class FamilyMemberController
     fun updateMemberById(
         @PathVariable(value = "id") id: Long, @RequestBody memberDto: CreateFamilyMember
     ): ResponseEntity<FamilyMemberGet> {
-        throw NotImplementedError()
-/*
+
         try {
             val member = createMapper.dtoToEntity(memberDto)
 
@@ -59,19 +58,18 @@ class FamilyMemberController
             return ResponseEntity.ok(getDTO)
         } catch (e: Exception) {
             throw ResourceNotFoundException()
-        }*/
+        }
 
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Gets the data of the member by the ID.")
     fun getMemberById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
-        /*try {
+        try {
             return ResponseEntity.ok(getMapper.entityToDto(service.getMemberById(id)!!))
         } catch (e: Exception) {
             throw ResourceNotFoundException()
-        }*/
-        throw NotImplementedError()
+        }
 
     }
 
@@ -79,13 +77,13 @@ class FamilyMemberController
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Deletes the member by the ID.")
     fun deleteById(@PathVariable(value = "id") id: Long): ResponseEntity<FamilyMemberGet> {
-        /*try {
+        try {
             val memberDeleted = getMapper.entityToDto(service.getMemberById(id)!!)
             service.deleteMember(id)
             return ResponseEntity.ok(memberDeleted)
         } catch (e: Exception) {
             throw ResourceNotFoundException()
-        }*/        throw NotImplementedError()
+        }
 
     }
 
