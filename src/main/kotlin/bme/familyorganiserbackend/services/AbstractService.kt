@@ -12,6 +12,8 @@ abstract class AbstractService<Entity: AbstractEntity> : IBaseService<Entity>
     @Autowired
     protected lateinit var repository: AbstractRepository<Entity>
 
+
+
     override fun getAll(): List<Entity> = repository.findAll()
     override fun getById(id: Long): Entity? = repository.findById(id).orElse(null)
 

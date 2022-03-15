@@ -10,6 +10,9 @@ abstract class AbstractEntity {
     @Column(name = "id", nullable = false)
     var id: Long = -1
 
+    companion object {
+        var name:String="entity"
+    }
 
 
 }

@@ -1,9 +1,6 @@
 package bme.familyorganiserbackend.controllers
 
-import bme.familyorganiserbackend.dtos.CreateFamilyMember
-import bme.familyorganiserbackend.dtos.FamilyMemberGet
-import bme.familyorganiserbackend.dtos.LoginDTO
-import bme.familyorganiserbackend.dtos.Tokens
+import bme.familyorganiserbackend.dtos.*
 import bme.familyorganiserbackend.entities.FamilyMember
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
@@ -16,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/family-member")
 class FamilyMemberController:
     AbstractController<FamilyMember, CreateFamilyMember, FamilyMemberGet>()
-     {
+ {
 
     @PostMapping("/register")
     @ApiOperation("Sign up method for users")
-    fun register(@RequestBody loginData: LoginDTO): ResponseEntity<Tokens> {
+    fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
         throw NotImplementedError()
     }
 

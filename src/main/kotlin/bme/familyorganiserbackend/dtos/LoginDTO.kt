@@ -1,8 +1,13 @@
 package bme.familyorganiserbackend.dtos
 
 
-class LoginDTO {
-    lateinit var uid:String
-    lateinit var username:String
-    lateinit var password:String
-}
+data class RegistrationDTO (
+    var uid:String,
+    var username:String,
+    var password:String
+)
+
+data class LoginDTO(
+    var username:String,
+    var password:String
+)
