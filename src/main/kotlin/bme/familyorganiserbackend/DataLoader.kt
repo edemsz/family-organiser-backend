@@ -24,26 +24,23 @@ open class DataLoader @Autowired constructor
 
         var family1 = Family("family 1")
         familyService.add(family1)
-        val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), family1)
-        val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), family1)
-        val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), family1)
+        val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
+        val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), null)
+        val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), null)
         familyMemberService.add(fm1)
         familyMemberService.add(fm2)
         familyMemberService.add(fm3)
-        /*family1= familyService.getById(1)!!
-        family1.head=fm2*/
-        //familyService.updateById(1,family1)
+        familyService.addMemberToFamily(1,1)
+        familyService.addMemberToFamily(1,2)
+        familyService.addMemberToFamily(1,3)
+
+        family1= familyService.getById(1)!!
+        family1.head=familyMemberService.getById(2)!!
+        familyService.updateById(1,family1)
+
+        println(familyService.getAll().size)
 
 
-        /*val mapper:PlainFamilyMemberMapper= PlainFamilyMemberMapper.INSTANCE
-
-        val fm1DTO=mapper.entityToPlain(fm1)
-        println(fm1DTO?.id)
-        println(fm1DTO?.lastName)
-        println(fm1DTO?.surname)
-        println(fm1DTO?.uid)
-        println(fm1DTO?.username)
-        println(fm1DTO?.email)*/
     }
 
 }

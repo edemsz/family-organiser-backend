@@ -52,7 +52,7 @@ class FamilyMember():AbstractEntity() {
     @Column(nullable = true)
     var birthDate: LocalDate? = null
 
-    @ManyToOne(cascade= [CascadeType.MERGE])
+    @ManyToOne//(cascade= [CascadeType.MERGE])
     @JsonManagedReference
     @JoinColumn(name="family_id", referencedColumnName = "id")
     var family: Family?=null

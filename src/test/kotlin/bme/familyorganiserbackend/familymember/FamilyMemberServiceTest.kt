@@ -1,5 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.FamilyOrganiserBackendApplication
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.family.FamilyRepository
 import org.junit.jupiter.api.Assertions.*
@@ -18,7 +19,7 @@ open class FamilyMemberServiceTest @Autowired constructor
     private val familyMemberService: FamilyMemberService
 ) {
 
-
+    private val testDisabled=FamilyOrganiserBackendApplication.TEST_DISABLED
     private fun dataLoad() {
         var family1 = Family("family 1")
         familyRepository.save(family1)
@@ -42,6 +43,8 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun repoEntityEqualsServiceEntity() {
+        if(testDisabled)
+            return
         assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         dataLoad()
         assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
@@ -60,6 +63,8 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun serviceInsertTest() {
+        if(testDisabled)
+            return
         assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         val add = FamilyMember()
         val EMAIL = "test@gmail.com"
@@ -86,7 +91,8 @@ open class FamilyMemberServiceTest @Autowired constructor
 
     @Test
     fun serviceUpdateTest() {
-
+        if(testDisabled)
+            return
         dataLoad()
         val initialMemberCount = familyMemberRepository.count()
         var family2 = familyRepository.getById(2)

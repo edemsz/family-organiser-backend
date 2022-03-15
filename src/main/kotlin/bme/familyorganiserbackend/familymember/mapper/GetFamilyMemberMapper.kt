@@ -9,15 +9,9 @@ import org.mapstruct.Mapping
 import org.mapstruct.factory.Mappers
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = [PlainFamilyMemberMapper::class])
 abstract class GetFamilyMemberMapper : AbstractGetMapper<FamilyMember, FamilyMemberGet>() {
 
-    @Mapping(target = "familyId", source = "member.family.id")
-    abstract fun memberToPlain(member: FamilyMember?): FamilyMemberPlain?
 
-    companion object {
-        val INSTANCE: GetFamilyMemberMapper
-            get() = Mappers.getMapper(GetFamilyMemberMapper::class.java)
-    }
 }
 

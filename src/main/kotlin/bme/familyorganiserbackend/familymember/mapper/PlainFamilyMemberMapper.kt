@@ -13,9 +13,5 @@ abstract class PlainFamilyMemberMapper : AbstractGetMapper<FamilyMember, FamilyM
     @Mapping(target = "familyId", source = "entity.family.id")
     abstract override fun entityToDto(entity: FamilyMember): FamilyMemberPlain
 
-    companion object {
-        val INSTANCE: PlainFamilyMemberMapper
-            get() = Mappers.getMapper(PlainFamilyMemberMapper::class.java)
-    }
 }
 

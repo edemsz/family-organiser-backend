@@ -23,12 +23,12 @@ class Family() : AbstractEntity() {
     @Column(nullable = true)
     var code: String = "egyed1K0d"
 
-    @OneToOne(cascade = arrayOf(CascadeType.MERGE))
+    @OneToOne
     @JsonBackReference
     @JoinColumn(name = "head_id", referencedColumnName = "id")
     var head: FamilyMember? = null
 
-    @OneToMany(mappedBy = "family",cascade= arrayOf(CascadeType.MERGE))
+    @OneToMany(mappedBy = "family")
     @JsonBackReference
     var members:List<FamilyMember>?=null
 

@@ -5,6 +5,7 @@ import bme.familyorganiserbackend.abstracts.AbstractService
 import bme.familyorganiserbackend.abstracts.AbstractRepository
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.FamilyMemberRepository
+import bme.familyorganiserbackend.familymember.FamilyMemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -12,14 +13,12 @@ import org.springframework.stereotype.Service
 @Service
 class FamilyService() : AbstractService<Family>(){
     @Autowired
-    private lateinit var familyMemberRepository:FamilyMemberRepository
+    private lateinit var familyMemberService: FamilyMemberService
     fun addMemberToFamily(familyId:Long,memberId:Long):Family{
-        val f=repository.getById(familyId)
-        val member=familyMemberRepository.findById(memberId)
-        if(f==null || member.isEmpty)
+        val family=repository.findById(familyId)
+        if(family.isEmpty)
             throw ResourceNotFoundException()
-        member.get().family=f
-        familyMemberRepository.save(member.get())
-        return f
+        familyMemberService.setFamilyById(memberId,family.get())
+        return family.get()
     }
 }
