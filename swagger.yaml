@@ -11,19 +11,19 @@ info:
 host: localhost:8050
 basePath: /
 tags:
-  - name: family-controller
+  - name: family-controllers
     description: Family Controller
-  - name: family-member-controller
+  - name: family-member-controllers
     description: Family Member Controller
-  - name: shopping-list-controller
+  - name: shopping-list-controllers
     description: Shopping List Controller
-  - name: shopping-list-item-controller
+  - name: shopping-list-shoppingitem-controllers
     description: Shopping List Item Controller
 paths:
   /api/family:
     get:
       tags:
-        - family-controller
+        - family-controllers
       summary: ' Gets all families.'
       operationId: getFamiliesUsingGET
       produces:
@@ -44,7 +44,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - family-controller
+        - family-controllers
       summary: Adds a family.
       operationId: addMemberUsingPOST
       consumes:
@@ -75,7 +75,7 @@ paths:
   /api/family-member:
     get:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: ' Gets all family members.'
       operationId: getMembersUsingGET
       produces:
@@ -96,7 +96,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Adds a family member.
       operationId: addMemberUsingPOST_1
       consumes:
@@ -127,7 +127,7 @@ paths:
   /api/family-member/login:
     post:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Login method for users
       operationId: loginUsingPOST
       consumes:
@@ -156,7 +156,7 @@ paths:
   /api/family-member/register:
     post:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Sign up method for users
       operationId: registerUsingPOST
       consumes:
@@ -187,7 +187,7 @@ paths:
   /api/family-member/{id}:
     get:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Gets the data of the member by the ID.
       operationId: getMemberByIdUsingGET
       produces:
@@ -213,7 +213,7 @@ paths:
       deprecated: false
     put:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Updates the data of a family member.
       operationId: updateMemberByIdUsingPUT_1
       consumes:
@@ -249,7 +249,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - family-member-controller
+        - family-member-controllers
       summary: Deletes the member by the ID.
       operationId: deleteByIdUsingDELETE_1
       produces:
@@ -276,7 +276,7 @@ paths:
   /api/family/{id}:
     get:
       tags:
-        - family-controller
+        - family-controllers
       summary: Gets the data of the family by the ID.
       operationId: getFamilyByIdUsingGET
       produces:
@@ -302,7 +302,7 @@ paths:
       deprecated: false
     put:
       tags:
-        - family-controller
+        - family-controllers
       summary: Updates the data of a family.
       operationId: updateMemberByIdUsingPUT
       consumes:
@@ -338,7 +338,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - family-controller
+        - family-controllers
       summary: Deletes the family with the ID.
       operationId: deleteByIdUsingDELETE
       produces:
@@ -365,7 +365,7 @@ paths:
   /api/family/{id}/add_member:
     post:
       tags:
-        - family-controller
+        - family-controllers
       summary: Endpoint for joining the family
       operationId: addToFamilyUsingPOST
       consumes:
@@ -402,7 +402,7 @@ paths:
   /api/family/{id}/join:
     post:
       tags:
-        - family-controller
+        - family-controllers
       summary: Endpoint for joining the family
       operationId: joinFamilyUsingPOST
       consumes:
@@ -439,7 +439,7 @@ paths:
   /api/family/{id}/leave:
     post:
       tags:
-        - family-controller
+        - family-controllers
       summary: Endpoint for leaving the family
       operationId: leaveFamilyUsingPOST
       consumes:
@@ -476,7 +476,7 @@ paths:
   /api/shopping-list:
     get:
       tags:
-        - shopping-list-controller
+        - shopping-list-controllers
       summary: Gets all shopping lists.
       operationId: getMembersUsingGET_1
       produces:
@@ -497,7 +497,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - shopping-list-controller
+        - shopping-list-controllers
       summary: Creates a new shopping list.
       operationId: addMemberUsingPOST_2
       consumes:
@@ -528,7 +528,7 @@ paths:
   /api/shopping-list-item:
     get:
       tags:
-        - shopping-list-item-controller
+        - shopping-list-shoppingitem-controllers
       summary: Gets all shopping list items.
       operationId: getMembersUsingGET_2
       produces:
@@ -549,8 +549,8 @@ paths:
       deprecated: false
     post:
       tags:
-        - shopping-list-item-controller
-      summary: Creates a new shopping list item.
+        - shopping-list-shoppingitem-controllers
+      summary: Creates a new shopping list shoppingitem.
       operationId: addMemberUsingPOST_3
       consumes:
         - application/json
@@ -558,8 +558,8 @@ paths:
         - '*/*'
       parameters:
         - in: body
-          name: item
-          description: item
+          name: shoppingitem
+          description: shoppingitem
           required: true
           schema:
             $ref: '#/definitions/CreateShoppingListItem'
@@ -580,8 +580,8 @@ paths:
   /api/shopping-list-item/{id}:
     get:
       tags:
-        - shopping-list-item-controller
-      summary: Gets the data of the item by the ID.
+        - shopping-list-shoppingitem-controllers
+      summary: Gets the data of the shoppingitem by the ID.
       operationId: getMemberByIdUsingGET_2
       produces:
         - '*/*'
@@ -606,7 +606,7 @@ paths:
       deprecated: false
     put:
       tags:
-        - shopping-list-item-controller
+        - shopping-list-shoppingitem-controllers
       summary: Updates the data of a shopping list.
       operationId: updateMemberByIdUsingPUT_2
       consumes:
@@ -621,8 +621,8 @@ paths:
           type: integer
           format: int64
         - in: body
-          name: item
-          description: item
+          name: shoppingitem
+          description: shoppingitem
           required: true
           schema:
             $ref: '#/definitions/CreateShoppingListItem'
@@ -642,8 +642,8 @@ paths:
       deprecated: false
     delete:
       tags:
-        - shopping-list-item-controller
-      summary: Deletes the item by the ID.
+        - shopping-list-shoppingitem-controllers
+      summary: Deletes the shoppingitem by the ID.
       operationId: deleteByIdUsingDELETE_3
       produces:
         - '*/*'
@@ -669,8 +669,8 @@ paths:
   /api/shopping-list-item/{id}/purchase:
     patch:
       tags:
-        - shopping-list-item-controller
-      summary: Purchasing the item by the ID.
+        - shopping-list-shoppingitem-controllers
+      summary: Purchasing the shoppingitem by the ID.
       operationId: purchaseByIdUsingPATCH
       consumes:
         - application/json
@@ -698,7 +698,7 @@ paths:
   /api/shopping-list/{id}:
     get:
       tags:
-        - shopping-list-controller
+        - shopping-list-controllers
       summary: Gets the data of the shopping list by the ID.
       operationId: getMemberByIdUsingGET_1
       produces:
@@ -724,7 +724,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - shopping-list-controller
+        - shopping-list-controllers
       summary: Deletes the shopping list by the ID.
       operationId: deleteByIdUsingDELETE_2
       produces:
@@ -751,8 +751,8 @@ paths:
   /api/shopping-list/{id}/add-item/{item_id}:
     patch:
       tags:
-        - shopping-list-controller
-      summary: Adds the shopping list item to the shopping list
+        - shopping-list-controllers
+      summary: Adds the shopping list shoppingitem to the shopping list
       operationId: addItemUsingPATCH
       consumes:
         - application/json
@@ -786,8 +786,8 @@ paths:
   /api/shopping-list/{id}/remove-item/{item_id}:
     patch:
       tags:
-        - shopping-list-controller
-      summary: Removes the shopping list item from the shopping list
+        - shopping-list-controllers
+      summary: Removes the shopping list shoppingitem from the shopping list
       operationId: removeItemUsingPATCH
       consumes:
         - application/json

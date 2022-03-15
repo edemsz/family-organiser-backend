@@ -1,15 +1,13 @@
 package bme.familyorganiserbackend
 
-import bme.familyorganiserbackend.family.Family
-import bme.familyorganiserbackend.familymember.FamilyMember
-import bme.familyorganiserbackend.family.FamilyRepository
-import bme.familyorganiserbackend.family.FamilyService
-import bme.familyorganiserbackend.familymember.FamilyMemberService
+import bme.familyorganiserbackend.entities.Family
+import bme.familyorganiserbackend.entities.FamilyMember
+import bme.familyorganiserbackend.services.FamilyService
+import bme.familyorganiserbackend.services.FamilyMemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
 
 @Component

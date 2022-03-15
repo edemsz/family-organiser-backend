@@ -1,8 +1,11 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.FamilyOrganiserBackendApplication
-import bme.familyorganiserbackend.family.Family
-import bme.familyorganiserbackend.family.FamilyRepository
+import bme.familyorganiserbackend.entities.FamilyMember
+import bme.familyorganiserbackend.entities.Family
+import bme.familyorganiserbackend.repositories.FamilyRepository
+import bme.familyorganiserbackend.repositories.FamilyMemberRepository
+import bme.familyorganiserbackend.services.FamilyMemberService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
