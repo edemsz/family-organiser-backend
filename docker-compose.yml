@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  mariadb:
+    image: mariadb:10.4
+    ports:
+      - 3306:3306
+    volumes:
+      - ~/apps/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=familydb
