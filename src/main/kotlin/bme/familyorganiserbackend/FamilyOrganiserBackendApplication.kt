@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @EnableSwagger2
 open class FamilyOrganiserBackendApplication{
     companion object{
-        public val TEST_DISABLED=true
+        const val TEST_DISABLED=true
 
     }
 }

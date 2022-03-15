@@ -1,16 +1,17 @@
 package bme.familyorganiserbackend.shoppinglist
 
+import bme.familyorganiserbackend.abstracts.AbstractGetDTO
 import bme.familyorganiserbackend.shoppinglist.item.ShoppingListItemPlain
 
-class ShoppingListGet {
-    var id:Long=0
+data class ShoppingListGet (
+    var id:Long,
 
-    var fullPrice:Int=0
+    var fullPrice:Int,
 
-    var completed:Boolean=false
+    var completed:Boolean=false,
 
-    var familyId: Long=0
+    var familyId: Long,
 
     var items:List<ShoppingListItemPlain>?= emptyList()
 
-}
+):AbstractGetDTO<ShoppingList>()

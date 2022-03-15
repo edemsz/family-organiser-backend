@@ -1,5 +1,6 @@
 package bme.familyorganiserbackend.shoppinglist
 
+import bme.familyorganiserbackend.abstracts.AbstractEntity
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.shoppinglist.item.ShoppingListItem
 import java.time.LocalDate
@@ -7,12 +8,7 @@ import javax.persistence.*
 
 
 @Entity
-class ShoppingList() {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    var id:Long=0
-
+class ShoppingList:AbstractEntity() {
     @Column
     var fullPrice:Int=0
 

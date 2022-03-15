@@ -1,7 +1,9 @@
 package bme.familyorganiserbackend.shoppinglist
 
-class CreateShoppingList {
-    var familyId: Long=0
+import bme.familyorganiserbackend.abstracts.AbstractCreateDTO
 
-    lateinit var location:String
-}
+data class CreateShoppingList (
+    var familyId: Long=0,
+
+    var location:String
+    ): AbstractCreateDTO<ShoppingList>()

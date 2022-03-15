@@ -4,7 +4,6 @@ import bme.familyorganiserbackend.ResourceNotFoundException
 import bme.familyorganiserbackend.abstracts.AbstractService
 import bme.familyorganiserbackend.abstracts.AbstractRepository
 import bme.familyorganiserbackend.familymember.FamilyMember
-import bme.familyorganiserbackend.familymember.FamilyMemberRepository
 import bme.familyorganiserbackend.familymember.FamilyMemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

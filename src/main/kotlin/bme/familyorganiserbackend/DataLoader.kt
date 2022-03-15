@@ -2,7 +2,6 @@ package bme.familyorganiserbackend
 
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.familymember.FamilyMember
-import bme.familyorganiserbackend.familymember.FamilyMemberRepository
 import bme.familyorganiserbackend.family.FamilyRepository
 import bme.familyorganiserbackend.family.FamilyService
 import bme.familyorganiserbackend.familymember.FamilyMemberService
@@ -38,7 +37,6 @@ open class DataLoader @Autowired constructor
         family1.head=familyMemberService.getById(2)!!
         familyService.updateById(1,family1)
 
-        println(familyService.getAll().size)
 
 
     }

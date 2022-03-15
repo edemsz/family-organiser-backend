@@ -1,9 +1,10 @@
-package bme.familyorganiserbackend.familymember
+package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractRepository
 import org.springframework.stereotype.Repository
 import javax.transaction.Transactional
 
+
 @Repository
 @Transactional(Transactional.TxType.MANDATORY)
-interface FamilyMemberRepository : AbstractRepository<FamilyMember>
+interface ShoppingListRepository : AbstractRepository<ShoppingList>
