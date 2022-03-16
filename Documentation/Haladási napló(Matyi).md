@@ -20,3 +20,10 @@
 - Az android programozás közben pedig tovább ismerkedtem a JetPack-el
 - Készítettem egy rövid ütemtervet a hónapra: [Ütemterv](https://github.com/Matyi98/MSc-Onlab1/blob/main/Dokument%C3%A1ci%C3%B3k/%C3%9Ctemterv.md)
 
+### 5.-ik hétre
+- Ádámmal bemutattuk egymásnak az eddig elkészült munkánkat
+- Segítettünk elindítani a Frontend/Backend részt egymásnak
+- A LogIn nézetet elkezdtem bekötni a frontendre
+- Olvastam az MVVM architektúráról (sajnos a raywenderlich.com -os MVVM tutoriál fizetős volt)
+- Foglalkoztam továbbá a kódom refaktorálásával, illetve próbáltam kitalálni egy MVVM alapú architektúrát a frontendnek, de ez még nem végleges
+- Olvastam a LiveData-ról is
