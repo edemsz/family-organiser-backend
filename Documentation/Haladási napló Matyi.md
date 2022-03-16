@@ -24,6 +24,6 @@
 - Ádámmal bemutattuk egymásnak az eddig elkészült munkánkat
 - Segítettünk elindítani a Frontend/Backend részt egymásnak
 - A LogIn nézetet elkezdtem bekötni a frontendre
-- Olvastam az MVVM architektúráról (sajnos a raywenderlich.com -os MVVM tutoriál fizetős volt)
+- Olvastam az MVVM architektúráról (~~sajnos a raywenderlich.com -os MVVM tutoriál fizetős volt~~)
 - Foglalkoztam továbbá a kódom refaktorálásával, illetve próbáltam kitalálni egy MVVM alapú architektúrát a frontendnek, de ez még nem végleges
 - Olvastam a LiveData-ról is
