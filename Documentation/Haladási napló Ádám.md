@@ -51,3 +51,5 @@ Matyival konzultáltam arról, hogy hogy tudja elindítani a backend kiszolgál�
 A Securityt is elkezdtem integrálni a rendszerbe, de az még egy későbbi feladat lesz kiépíteni.
 
 A következő hétre vagy a regisztrációs-belépéses folyamat vagy a bevásárlólista kezelése lesz a dolgom, valószínűleg inkább az előző. Ehhez JWT tokent fogok használni, aminek még utána kell néznem, hogy pontosan hogyan működik.
+
+
