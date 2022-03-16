@@ -8,6 +8,7 @@ interface IBaseService<Entity: AbstractEntity> {
     fun add(e:Entity): Entity
 
     fun getAll(): List<Entity>
+    fun getAllWithPaging(page:Int,size:Int):List<Entity>
     fun getById(id: Long): Entity?
 
     fun updateById( id: Long,entity: Entity,): Entity

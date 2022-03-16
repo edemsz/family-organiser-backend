@@ -5,6 +5,7 @@ import bme.familyorganiserbackend.entities.AbstractEntity
 import bme.familyorganiserbackend.repositories.AbstractRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.data.domain.PageRequest
 
 @Service
 abstract class AbstractService<Entity: AbstractEntity> : IBaseService<Entity>
@@ -15,7 +16,13 @@ abstract class AbstractService<Entity: AbstractEntity> : IBaseService<Entity>
 
 
     override fun getAll(): List<Entity> = repository.findAll()
+
     override fun getById(id: Long): Entity? = repository.findById(id).orElse(null)
+    override fun getAllWithPaging(page: Int, size: Int): List<Entity> {
+        val pageable= PageRequest.of(page,size)
+        val entities=repository.findAll(pageable)
+        return entities.toList()
+    }
 
     override fun add(e: Entity): Entity = repository.save(e)
 

@@ -24,8 +24,12 @@ abstract class AbstractController<
 
     @GetMapping
     @ApiOperation(value = "Gets all entities.")
-    fun getEntities(): ResponseEntity<List<GetDTO>> {
-        val entities: List<Entity> = service.getAll()
+    fun getEntities(@RequestParam(required = false) page:Int?,
+                    @RequestParam(required = false) size:Int?)
+    : ResponseEntity<List<GetDTO>> {
+        val entities: List<Entity> = if (page == null || size == null) service.getAll()
+        else
+            service.getAllWithPaging(page, size)
         val dtos = getMapper.listOfEntitiesToDtos(entities)
         return ResponseEntity.ok(dtos)
     }

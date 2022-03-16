@@ -2,23 +2,41 @@ package bme.familyorganiserbackend
 
 import bme.familyorganiserbackend.entities.Family
 import bme.familyorganiserbackend.entities.FamilyMember
-import bme.familyorganiserbackend.services.FamilyService
+import bme.familyorganiserbackend.repositories.FamilyRepository
 import bme.familyorganiserbackend.services.FamilyMemberService
+import bme.familyorganiserbackend.services.FamilyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
 import java.time.LocalDate
+import kotlin.random.Random.Default.nextInt
 
 @Component
 open class DataLoader @Autowired constructor
     (
     private var familyMemberService: FamilyMemberService,
-    private var familyService: FamilyService
+    private var familyService: FamilyService,
+    private val familyRepository: FamilyRepository
 ) : ApplicationRunner {
+    private fun manyFamilies(){
+        val n=1000
+        for ( i in 1..n) {
+            val STRING_LENGTH = 10
+            val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+            val randomString = (1..STRING_LENGTH)
+                .map { nextInt(0, charPool.size) }
+                .map(charPool::get)
+                .joinToString("")
+            val family = Family(randomString)
+            familyService.add(family)
+        }
+
+
+    }
 
     override fun run(args: ApplicationArguments?) {
-
+        manyFamilies()
         var family1 = Family("family 1")
         familyService.add(family1)
         val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
@@ -34,6 +52,8 @@ open class DataLoader @Autowired constructor
         family1= familyService.getById(1)!!
         family1.head=familyMemberService.getById(2)!!
         familyService.updateById(1,family1)
+
+
 
 
 
