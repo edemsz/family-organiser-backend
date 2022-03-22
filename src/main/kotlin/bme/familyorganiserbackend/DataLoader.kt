@@ -1,10 +1,9 @@
 package bme.familyorganiserbackend
 
-import bme.familyorganiserbackend.entities.Family
-import bme.familyorganiserbackend.entities.FamilyMember
-import bme.familyorganiserbackend.repositories.FamilyRepository
-import bme.familyorganiserbackend.services.FamilyMemberService
-import bme.familyorganiserbackend.services.FamilyService
+import bme.familyorganiserbackend.family.Family
+import bme.familyorganiserbackend.familymember.FamilyMember
+import bme.familyorganiserbackend.familymember.FamilyMemberService
+import bme.familyorganiserbackend.family.FamilyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
@@ -17,7 +16,6 @@ open class DataLoader @Autowired constructor
     (
     private var familyMemberService: FamilyMemberService,
     private var familyService: FamilyService,
-    private val familyRepository: FamilyRepository
 ) : ApplicationRunner {
     private fun manyFamilies(){
         val n=1000
@@ -52,10 +50,25 @@ open class DataLoader @Autowired constructor
         family1= familyService.getById(1)!!
         family1.head=familyMemberService.getById(2)!!
         familyService.updateById(1,family1)
+        manyMembers()
 
 
+        
 
+    }
 
+    private fun manyMembers() {
+        val n=1000
+        for ( i in 1..n) {
+            val STRING_LENGTH = 10
+            val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+            val randomString = (1..STRING_LENGTH)
+                .map { nextInt(0, charPool.size) }
+                .map(charPool::get)
+                .joinToString("")
+            val fm = FamilyMember(randomString, randomString, "$randomString@user.hu", null, LocalDate.of(1994, 2, 12), null)
+            familyMemberService.add(fm)
+        }
 
     }
 

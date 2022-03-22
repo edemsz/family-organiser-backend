@@ -1,11 +1,9 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.FamilyOrganiserBackendApplication
-import bme.familyorganiserbackend.entities.FamilyMember
-import bme.familyorganiserbackend.entities.Family
-import bme.familyorganiserbackend.repositories.FamilyRepository
-import bme.familyorganiserbackend.repositories.FamilyMemberRepository
-import bme.familyorganiserbackend.services.FamilyMemberService
+import bme.familyorganiserbackend.family.Family
+import bme.familyorganiserbackend.family.FamilyRepository
+import bme.familyorganiserbackend.family.FamilyService
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,28 +17,28 @@ open class FamilyMemberServiceTest @Autowired constructor
     (
     private val familyMemberRepository: FamilyMemberRepository,
     private val familyRepository: FamilyRepository,
-    private val familyMemberService: FamilyMemberService
+    private val familyMemberService: FamilyMemberService,
+    private val familyService: FamilyService
 ) {
 
     private val testDisabled=FamilyOrganiserBackendApplication.TEST_DISABLED
     private fun dataLoad() {
         var family1 = Family("family 1")
-        familyRepository.save(family1)
-        val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), family1)
-        val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), family1)
-        val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), family1)
-        familyRepository.save(family1)
+        familyService.add(family1)
+        val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
+        val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), null)
+        val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), null)
+        familyMemberService.add(fm1)
+        familyMemberService.add(fm2)
+        familyMemberService.add(fm3)
+        familyService.addMemberToFamily(1,1)
+        familyService.addMemberToFamily(1,2)
+        familyService.addMemberToFamily(1,3)
 
-        val family2 = Family("family 2")
-        familyRepository.save(family2)
-        val fm4 = FamilyMember("user4", "user", "user4@user.hu", null, null, family2)
+        family1= familyService.getById(1)!!
+        family1.head=familyMemberService.getById(2)!!
+        familyService.updateById(1,family1)
 
-        familyMemberRepository.save(fm1)
-        familyMemberRepository.save(fm2)
-        familyMemberRepository.save(fm3)
-        familyMemberRepository.save(fm4)
-        family1.head = fm1
-        familyRepository.save(family1)
 
     }
 
