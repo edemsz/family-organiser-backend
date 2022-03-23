@@ -1,7 +1,7 @@
 package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractGetDTO
-import bme.familyorganiserbackend.shoppinglistitem.ShoppingListItemPlain
+import bme.familyorganiserbackend.shoppinglistitem.GetShoppingListItem
 
 data class ShoppingListGet (
     var id:Long,
@@ -12,6 +12,8 @@ data class ShoppingListGet (
 
     var familyId: Long,
 
-    var items:List<ShoppingListItemPlain>?= emptyList()
+    var items:List<GetShoppingListItem>?= emptyList(),
+
+    var location:String
 
 ):AbstractGetDTO<ShoppingList>()

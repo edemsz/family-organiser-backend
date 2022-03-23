@@ -15,7 +15,8 @@ class FamilyMemberController:
     AbstractController<FamilyMember, CreateFamilyMember, FamilyMemberGet>()
  {
 
-    @PostMapping("/register")
+
+     @PostMapping("/register")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
         throw NotImplementedError()

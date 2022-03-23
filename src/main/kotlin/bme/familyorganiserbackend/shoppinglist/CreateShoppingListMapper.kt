@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.shoppinglistitem
+package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractCreateMapper
 import bme.familyorganiserbackend.shoppinglist.CreateShoppingList

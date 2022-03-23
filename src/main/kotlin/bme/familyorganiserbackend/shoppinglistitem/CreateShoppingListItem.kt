@@ -1,11 +1,13 @@
 package bme.familyorganiserbackend.shoppinglistitem
 
-class CreateShoppingListItem {
-    var price:Int=0
+import bme.familyorganiserbackend.abstracts.AbstractCreateDTO
 
-    var product:String=""
+data class CreateShoppingListItem (
+    var price:Int=0,
 
-    var amount:Int=0
+    var product:String="",
 
-    var shoppingListId: Long=0
-}
+    var amount:Int=0,
+
+    var shoppingListId: Long?=0
+): AbstractCreateDTO<ShoppingListItem>()

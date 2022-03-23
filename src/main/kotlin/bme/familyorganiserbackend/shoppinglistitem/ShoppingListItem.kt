@@ -1,15 +1,12 @@
 package bme.familyorganiserbackend.shoppinglistitem
 
+import bme.familyorganiserbackend.abstracts.AbstractEntity
 import bme.familyorganiserbackend.shoppinglist.ShoppingList
 import javax.persistence.*
 
 
 @Entity
-class ShoppingListItem() {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    var id:Long=0
+class ShoppingListItem: AbstractEntity() {
 
     @Column
     var price:Int=0

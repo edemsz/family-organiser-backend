@@ -12,6 +12,7 @@ abstract class AbstractController<
         CreateDTO: AbstractCreateDTO<Entity>,
         GetDTO: AbstractGetDTO<Entity>,
 > {
+
     @Autowired
     protected open lateinit var service: AbstractService<Entity>
     @Autowired
