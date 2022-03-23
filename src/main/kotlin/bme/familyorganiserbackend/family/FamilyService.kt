@@ -19,6 +19,15 @@ class FamilyService : AbstractService<Family>(){
         return family.get()
     }
 
+    fun removeMemberFromFamily(familyId:Long,memberId:Long): Family {
+        val family=repository.findById(familyId)
+        if(family.isEmpty)
+            throw ResourceNotFoundException()
+        familyMemberService.setFamilyById(memberId,null)
+        return family.get()
+    }
+
+
     override fun add(family: Family): Family {
         val f=super.add(family)
         family.head?.let { familyMemberService.setFamily(it,f) }
@@ -28,4 +37,6 @@ class FamilyService : AbstractService<Family>(){
         }
         return f
     }
+
+
 }

@@ -17,7 +17,8 @@ class FamilyController:
     @PostMapping("/{id}/leave")
     @ApiOperation(value = "Endpoint for leaving the family")
     fun leaveFamily(@PathVariable(value = "id") id: Long, @RequestParam memberId: Long): ResponseEntity<FamilyPlain> {
-        throw NotImplementedError()
+        val family=familyService.removeMemberFromFamily(id,memberId)
+        return ResponseEntity.ok(getMapper.entityToDto(family))
     }
 
     @PostMapping("/{id}/join")
