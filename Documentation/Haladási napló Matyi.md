@@ -27,3 +27,11 @@
 - Olvastam az MVVM architektúráról (~~sajnos a raywenderlich.com -os MVVM tutoriál fizetős volt~~)
 - Foglalkoztam továbbá a kódom refaktorálásával, illetve próbáltam kitalálni egy MVVM alapú architektúrát a frontendnek, de ez még nem végleges
 - Olvastam a LiveData-ról is
+
+### 6.-ik hétre
+- Utánaolvastam a kliens oldali Api kommunikcáió generálására a lehetőségeknek.
+- [swagger](https://editor.swagger.io/) generate client -> kotlin segítségével kódot generáltattam
+- Az így kapott kódot beintegráltam az eddig elkészült frontendes projektbe
+- Helyenként hibát/deprecated-et jelölt az Andriod Studio, néhány dependency-t hozzá kellett adni még a projekthez, hogy működjön is a generált komponens
+- Teszteltem ezt Ádám projektjét futtatva. 
+- Sajnos épp kifogtam egy kisebb hibát backendben, ami miatt az nem működött, próbáltam debuggolni, sikertelenül. Néhány annotációt átírva lefuttattam a projektet, de sajnos több lateinit érték nélkül maradt így és emiatt azt sikerült csak ellenőrízzem, hogy a frontend megfelelő hívásai errorokat okoznak a backenden a megfelelő helyein. Ádámmal beszéltünk a hibáról, de mivel én szerda délután írtam neki, így érthető módon nem sikerült még megoldani ezt.
