@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.basic
+package bme.familyorganiserbackend
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value

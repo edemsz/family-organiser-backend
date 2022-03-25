@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
-import bme.familyorganiserbackend.basic.FamilyOrganiserBackendApplication
+import bme.familyorganiserbackend.FamilyOrganiserBackendApplication
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.family.FamilyRepository
 import bme.familyorganiserbackend.family.FamilyService
