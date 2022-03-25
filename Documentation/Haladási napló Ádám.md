@@ -53,3 +53,12 @@ A Securityt is elkezdtem integrálni a rendszerbe, de az még egy későbbi fela
 A következő hétre vagy a regisztrációs-belépéses folyamat vagy a bevásárlólista kezelése lesz a dolgom, valószínűleg inkább az előző. Ehhez JWT tokent fogok használni, aminek még utána kell néznem, hogy pontosan hogyan működik.
 
 
+## 6. hétre
+
+A bevásárlólista-itemekre megírtam a logikát az absztrakt osztályok segítségével: itt megláttam, hogy tényleg nem kell külön kódot írnom az alap funkciókra (pl. CRUD), csak a különleges dolgokra (pl. a shoppingListId-ból nem találja ki, hogy melyik ShoppingListet hivatkozza be).
+
+A Securityt tanulmányoztam, annak néztem utána, hogy hogyan lehetne implementálni a rendszerbe.
+
+Refaktoráltam a kódot: talán úgy jobb lesz, ha entitásonként külön tárolom az osztályokat, és nem szerep (repository, controller....) szerint.
+
+A mappereket javítottam, most már a familys és a familymemberös POST requesteknél a kapcsolatokat is jól felveszi.
