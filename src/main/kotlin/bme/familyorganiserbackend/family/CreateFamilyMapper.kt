@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.family
 
-import bme.familyorganiserbackend.ResourceNotFoundException
+import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.abstracts.AbstractCreateMapper
 import bme.familyorganiserbackend.familymember.FamilyMemberRepository
 import org.mapstruct.AfterMapping

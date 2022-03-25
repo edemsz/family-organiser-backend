@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.abstracts
 
-import bme.familyorganiserbackend.ResourceNotFoundException
+import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

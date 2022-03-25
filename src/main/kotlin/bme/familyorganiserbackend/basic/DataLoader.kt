@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend
+package bme.familyorganiserbackend.basic
 
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.familymember.FamilyMember
@@ -34,6 +34,7 @@ open class DataLoader @Autowired constructor
     }
 
     override fun run(args: ApplicationArguments?) {
+
         manyFamilies()
         var family1 = Family("family 1")
         familyService.add(family1)

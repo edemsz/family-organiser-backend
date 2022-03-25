@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
-import bme.familyorganiserbackend.ResourceNotFoundException
+import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.abstracts.AbstractService
 import org.springframework.beans.factory.annotation.Autowired

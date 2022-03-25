@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.familymember
 
-import bme.familyorganiserbackend.FamilyOrganiserBackendApplication
+import bme.familyorganiserbackend.basic.FamilyOrganiserBackendApplication
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.family.FamilyRepository
 import bme.familyorganiserbackend.family.FamilyService
@@ -21,7 +21,7 @@ open class FamilyMemberServiceTest @Autowired constructor
     private val familyService: FamilyService
 ) {
 
-    private val testDisabled=FamilyOrganiserBackendApplication.TEST_DISABLED
+    private val testDisabled= FamilyOrganiserBackendApplication.TEST_DISABLED
     private fun dataLoad() {
         var family1 = Family("family 1")
         familyService.add(family1)
