@@ -4,6 +4,7 @@ import bme.familyorganiserbackend.familymember.FamilyMember
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
 import org.springframework.http.ResponseCookie
 import org.springframework.stereotype.Component
 import java.util.*
@@ -12,10 +13,11 @@ import java.util.*
 @Component
 open class JWTTools {
     @Value("app.jwtSecret")
-
     private lateinit var jwtSecret: String
-    @Value("app.jwtExpirationMs")
-    private val jwtExpirationMs = 0
+
+    @Value("\${app.jwtExpirationMs}")
+    private var jwtExpirationMs :Int=0
+
 
     @Value("app.jwtCookieName")
     private lateinit var jwtCookie: String
