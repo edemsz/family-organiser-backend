@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.dtos
+package bme.familyorganiserbackend.auth
 
 class Tokens {
     lateinit var accessToken:String

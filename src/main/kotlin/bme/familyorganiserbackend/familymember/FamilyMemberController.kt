@@ -1,6 +1,7 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.abstracts.AbstractController
+import bme.familyorganiserbackend.auth.Tokens
 import bme.familyorganiserbackend.dtos.*
 import io.swagger.annotations.ApiOperation
 import org.springframework.http.ResponseEntity
@@ -16,7 +17,7 @@ class FamilyMemberController:
  {
 
 
-     @PostMapping("/register")
+     @PostMapping("/sign-up")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
         throw NotImplementedError()

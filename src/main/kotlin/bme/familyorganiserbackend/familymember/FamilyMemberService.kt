@@ -4,13 +4,20 @@ import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import bme.familyorganiserbackend.abstracts.AbstractService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 
 @Service
 class FamilyMemberService
 @Autowired
-constructor() : AbstractService<FamilyMember>() {
+constructor() : AbstractService<FamilyMember>() , UserDetailsService{
+    @Autowired
+    lateinit var familyMemberRepository: FamilyMemberRepository
+
     override fun add(e: FamilyMember): FamilyMember {
         e.setUid()
         return super.add(e)
@@ -37,6 +44,12 @@ constructor() : AbstractService<FamilyMember>() {
         return member.get()
     }
 
+    override fun loadUserByUsername(username: String?): UserDetails {
+        val member: FamilyMember = familyMemberRepository.findByUsername(username!!)
+            ?: throw UsernameNotFoundException("Username not found")
+        return User(member.username,member.password, emptyList())
+
+    }
 
 
 }

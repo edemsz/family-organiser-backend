@@ -1,8 +1,11 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.abstracts.AbstractEntity
+import bme.familyorganiserbackend.auth.Role
 import bme.familyorganiserbackend.family.Family
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -13,7 +16,7 @@ class FamilyMember(): AbstractEntity() {
 
     constructor(
         surname: String, lastName: String,
-        email: String, photo: String?, birthDate: LocalDate?, family: Family?
+        email: String, photo: String?, birthDate: LocalDate?, family: Family?,
     ) : this() {
         this.surname = surname
         this.lastName = lastName
@@ -64,6 +67,12 @@ class FamilyMember(): AbstractEntity() {
 
     @Column(nullable = false, name = "user_id")
     lateinit var uid: String
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id")])
+    var roles:MutableList<Role> = arrayListOf()
 
     @PreRemove
     private fun removeHeadFromFamily() {
