@@ -172,6 +172,21 @@
 
     </dependencies>
 
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+        </profile>
+        <profile>
+            <id>production</id>
+        </profile>
+    </profiles>
+
+
     <repositories>
         <repository>
             <id>swagger1</id>
@@ -182,6 +197,12 @@
 
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -329,6 +350,7 @@
 
 
         </plugins>
+
     </build>
 
 </project>
