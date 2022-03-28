@@ -1,13 +1,49 @@
-version: '3.9'
+version: '3'
 
 services:
-  mariadb:
+  familydb:
+    container_name: familydb
     image: mariadb:10.4
     ports:
-      - 3306:3306
+      - target: 3306
+        published: 3306
+        protocol: tcp
+        mode: host
     volumes:
-      - ~/apps/mysql:/var/lib/mysql
+      - mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=familydb
+    expose:
+      - 3306
+    networks:
+      - backdb
+
+  family-organiser-backend:
+    container_name: family-organiser-backend
+    image: family-organiser-backend:latest
+    restart: on-failure
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8050:8050
+    depends_on:
+      - familydb
+    networks:
+      - backdb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://familydb:3306/familydb?autoReconnect=true&useSSL=false
+
+
+
+
+
+volumes:
+  mariadb:
+
+
+networks:
+  backdb:
+    driver: bridge
