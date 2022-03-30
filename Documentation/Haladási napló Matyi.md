@@ -41,4 +41,5 @@
   - az Android Studio javasolt hibamódosításait elfogadtam, ezzel fordíthatóvá vált a generált kód (itt több hiba és deprecated kódrész is módosításra került)
   - DateAndTime-ra fordította a születési dátumot, viszont mivel ez igazából csak simán Date, hibát okozott, hogy a backend nem küldött vissza születési órát, percet, másodpercet, így mindenütt a generált kódban a LocalDate-ra módosítottam a LocalDateAndTimet; Ezenkívül a Json alakításai során szükség volt egy adapter osztályra, amit innen másoltam: [LocalDateAdapter](https://stackoverflow.com/questions/57972766/java-lang-illegalargumentexception-platform-class-java-time-localdatetime-with)
 - Írtam teszteseteket a backend endpointjainak elérhetőségének ellenőrzésére
+- Készítettem egy kezdetleges validatort log in és regisztrációhoz. 
   
