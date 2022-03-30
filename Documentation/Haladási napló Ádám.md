@@ -62,3 +62,11 @@ A Securityt tanulmányoztam, annak néztem utána, hogy hogyan lehetne implement
 Refaktoráltam a kódot: talán úgy jobb lesz, ha entitásonként külön tárolom az osztályokat, és nem szerep (repository, controller....) szerint.
 
 A mappereket javítottam, most már a familys és a familymemberös POST requesteknél a kapcsolatokat is jól felveszi.
+
+## 7. hétre
+
+Kitettem dockerbe az applikációt, ezzel nagyon sok idő ment el, mert a containerben kellett mindent megoldani: a mavenes fordítást, a javás indítást, azt, hogy a maven beletegye a kotlinos modulokat is (enélkül nem  tudta megfelelően értelmezni a kotlinban írt forráskódot), illetve a main osztályt is nekem kellett megadni: itt derült ki számomra, hogy habár egy kotlin fájlba lehet több osztályt írni, a kotlin-fordító minden fájlból (még ha több osztály is van benne eredetileg) egy fájlt csinál, aminek Kt a fájlvége.
+
+A dockeres integráció után viszont nem futott a kód IntelliJ-ben, mivel a mavenes deployolás közben beletette a nem megfelelő kotlin verziót, ami régi verziójú kotlin kódot generált. Tehát meg kellett adnom, hogy intellij-s futtatáskor ne használja a mavenbe beleírt kotlin könyvtárakat: profilokat hoztam létre: production és dev néven. Ha a dockerből indítjuk a projektet, production profillal indítja, más módon pedig a dev módot használja.
+
+A securityt próbáltam implementálni, de a loginnál most sajnos 403-as hibát dob. A többi kérés jelenleg nem igényel securitys azonosítást.
