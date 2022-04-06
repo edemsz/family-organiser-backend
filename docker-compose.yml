@@ -10,7 +10,7 @@ services:
         protocol: tcp
         mode: host
     volumes:
-      - mariadb
+      - mariadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root

@@ -22,7 +22,7 @@ open class JWTTools {
     @Value("app.jwtCookieName")
     private lateinit var jwtCookie: String
 
-    fun generateJwtCookie(userPrincipal: FamilyMember): ResponseCookie? {
+    fun generateJwtCookie(userPrincipal: User): ResponseCookie? {
         val jwt: String = generateTokenFromUsername(userPrincipal.username)
         return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge((24 * 60 * 60).toLong()).httpOnly(true).build()
     }

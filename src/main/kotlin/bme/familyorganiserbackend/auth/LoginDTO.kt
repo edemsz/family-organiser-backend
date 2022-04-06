@@ -1,4 +1,4 @@
-package bme.familyorganiserbackend.dtos
+package bme.familyorganiserbackend.auth
 
 
 data class RegistrationDTO (

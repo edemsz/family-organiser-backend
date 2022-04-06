@@ -5,7 +5,5 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 abstract class AbstractEmptyController<Entity: AbstractEntity> {
-    @Autowired
-    protected open lateinit var service: AbstractService<Entity>
 
 }

@@ -12,30 +12,34 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.factory.PasswordEncoderFactories
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.firewall.HttpFirewall
 import org.springframework.security.web.firewall.StrictHttpFirewall
 
-/*
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
     prePostEnabled = true
-)*/
+)
 open class SecurityConfig: WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var userDetailsService: UserDetailsService
 
+    @Throws(Exception::class)
 
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
-        authenticationManagerBuilder.userDetailsService(userDetailsService)
+        authenticationManagerBuilder
+            .userDetailsService(this.userDetailsService)
             .passwordEncoder(passwordEncoder())
-        http.cors().and().authorizeRequests().anyRequest().permitAll()
+
+
+
 
     }
 
     @Bean
-    @Throws(Exception::class)
     override fun authenticationManagerBean(): AuthenticationManager? {
         return super.authenticationManagerBean()
     }
@@ -45,9 +49,30 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
         return BCryptPasswordEncoder()
     }
 
-    override fun configure(webSecurity: WebSecurity) {
-        super.configure(webSecurity)
-        webSecurity.httpFirewall(allowUrlEncodedSlashHttpFirewall())
+    override fun configure(http: HttpSecurity) {
+        http.cors().and().authorizeRequests().antMatchers(
+            "/api/login/**",
+            "/api/token/refresh",
+            "/api/hasRightForPage",
+            "/api/person/register",
+
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**"
+        ).permitAll()
+
+
+        http.csrf().disable()
+    }
+
+
+    protected open fun registerAuthentication(authManagerBuilder: AuthenticationManagerBuilder) {
+        authManagerBuilder
+            .inMemoryAuthentication()
+            .withUser("user").password("user").roles("ADMIN")
     }
 
     @Bean

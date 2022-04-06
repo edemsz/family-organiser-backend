@@ -7,6 +7,7 @@ import bme.familyorganiserbackend.family.FamilyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import java.time.LocalDate
 import kotlin.random.Random.Default.nextInt
@@ -32,13 +33,17 @@ open class DataLoader @Autowired constructor
 
 
     }
+    @Autowired
+    lateinit var  passwordEncoder: PasswordEncoder
+
 
     override fun run(args: ApplicationArguments?) {
 
         manyFamilies()
         var family1 = Family("family 1")
         familyService.add(family1)
-        val fm1 = FamilyMember("user1", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
+        val fm1 = FamilyMember("user", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
+        familyMemberService.setPassword(fm1.uid,passwordEncoder.encode("user"))
         val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), null)
         val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), null)
         familyMemberService.add(fm1)

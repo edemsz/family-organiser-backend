@@ -1,13 +1,14 @@
 package bme.familyorganiserbackend.familymember
 
+import bme.familyorganiserbackend.abstracts.AbstractService
+import bme.familyorganiserbackend.auth.User
 import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
-import bme.familyorganiserbackend.abstracts.AbstractService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 
@@ -17,6 +18,8 @@ class FamilyMemberService
 constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
+
+
 
     override fun add(e: FamilyMember): FamilyMember {
         e.setUid()
@@ -45,10 +48,17 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     }
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        val member: FamilyMember = familyMemberRepository.findByUsername(username!!)
-            ?: throw UsernameNotFoundException("Username not found")
-        return User(member.username,member.password, emptyList())
+        val member=familyMemberRepository.findByUsername(username!!)?: throw UsernameNotFoundException("User not found")
+        return buildUserFromMember(member)
 
+    }
+    fun buildUserFromMember(member:FamilyMember): User {
+        return User()
+        //TODO ezt még meg kell írni
+    }
+
+    fun setPassword(uid:String,passwordEncoded:String){
+        familyMemberRepository.findByUid(uid)?.password=passwordEncoded
     }
 
 

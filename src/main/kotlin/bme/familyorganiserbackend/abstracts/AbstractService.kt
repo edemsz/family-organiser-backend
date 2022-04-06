@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import org.springframework.data.domain.PageRequest
 
 @Service
-abstract class AbstractService<Entity: AbstractEntity> : IBaseService<Entity>
+abstract class AbstractService<Entity: AbstractEntity> : AbstractEmptyService,IBaseService<Entity>
 {
     @Autowired
     protected lateinit var repository: AbstractRepository<Entity>
@@ -49,4 +49,9 @@ abstract class AbstractService<Entity: AbstractEntity> : IBaseService<Entity>
             true
         }.orElse(false)
     }
+}
+
+@Service
+interface AbstractEmptyService{
+
 }
