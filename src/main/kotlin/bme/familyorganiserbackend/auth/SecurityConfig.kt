@@ -27,7 +27,6 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     @Autowired
     private lateinit var userDetailsService: UserDetailsService
 
-    @Throws(Exception::class)
 
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
         authenticationManagerBuilder
@@ -52,10 +51,8 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.cors().and().authorizeRequests().antMatchers(
-            "/api/login/**",
-            "/api/token/refresh",
-            "/api/hasRightForPage",
-            "/api/person/register",
+            "/api/family-member/login/**",
+            "/api/family-member/register/**",
 
             "/v2/api-docs",
             "/configuration/ui",
