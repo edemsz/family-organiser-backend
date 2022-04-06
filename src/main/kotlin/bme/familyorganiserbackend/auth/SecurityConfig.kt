@@ -33,6 +33,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
         authenticationManagerBuilder
             .userDetailsService(this.userDetailsService)
             .passwordEncoder(passwordEncoder())
+        registerAuthentication(authenticationManagerBuilder)
 
 
 
