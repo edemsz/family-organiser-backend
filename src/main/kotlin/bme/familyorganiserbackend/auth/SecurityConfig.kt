@@ -70,7 +70,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     protected open fun registerAuthentication(authManagerBuilder: AuthenticationManagerBuilder) {
         authManagerBuilder
             .inMemoryAuthentication()
-            .withUser("user").password("user").roles("ADMIN")
+            .withUser("admin").password("admin").roles("ADMIN")
     }
 
     @Bean
