@@ -43,3 +43,9 @@
 - Írtam teszteseteket a backend endpointjainak elérhetőségének ellenőrzésére
 - Készítettem egy kezdetleges validatort log in és regisztrációhoz. 
   
+### 8.-ik hétre
+- Animációt állítottam be activity váltásra
+- Létrehoztam egy profil szerkesztő activity-t
+- A profil adatokhoz egy dátum megadó bemeneti mező is kellett, mivel készet nem találtam, implementáltam egyet
+- A profil beállításokat sharedPreference-be mentettem
+- Szerkesztettem a Family nézetet (de még nincs teljesen kész)
