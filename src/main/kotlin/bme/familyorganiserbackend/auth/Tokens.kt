@@ -1,6 +1,6 @@
 package bme.familyorganiserbackend.auth
 
-class Tokens {
-    lateinit var accessToken:String
-    lateinit var refreshToken:String
-}
+data class Tokens (
+    var accessToken:String,
+    var refreshToken:String
+    )

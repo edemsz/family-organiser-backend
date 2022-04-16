@@ -1,20 +1,20 @@
 package bme.familyorganiserbackend.auth
 
 import bme.familyorganiserbackend.abstracts.AbstractEntity
+import bme.familyorganiserbackend.abstracts.AbstractGetDTO
+import bme.familyorganiserbackend.familymember.FamilyMember
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
-import javax.persistence.Entity
 
-@Entity
-data class User(
+class User (
     private var username: String? = null,
-    var firstname: String? = null,
-    var lastname: String? = null,
+    var firstName: String? = null,
+    var lastName: String? = null,
     private var password: String? = null,
     var email: String? = null,
     var uid:String?=null,
-    var lastPasswordResetDate: LocalDate? = null) : AbstractEntity(),UserDetails {
+    var lastPasswordResetDate: LocalDate? = null) : AbstractEntity(),AbstractGetDTO<FamilyMember>,UserDetails {
 
     @Transient
     var grantedAuthorities: MutableCollection<out GrantedAuthority>? = null
@@ -35,4 +35,11 @@ data class User(
     override fun isCredentialsNonExpired()=true
 
     override fun isEnabled() =true
+
+    fun setUsername(username: String?) {
+        this.username = username
+    }
+    fun setPassword(password:String?){
+        this.password=password
+    }
 }

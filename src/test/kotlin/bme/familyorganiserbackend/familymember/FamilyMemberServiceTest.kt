@@ -70,20 +70,20 @@ open class FamilyMemberServiceTest @Autowired constructor
         val add = FamilyMember()
         val EMAIL = "test@gmail.com"
         val LAST_NAME = "ln"
-        val SURNAME = "Sir Name"
+        val FIRST_NAME = "Sir Name"
         val USERNAME = "user11"
         val BIRTHDATE = LocalDate.of(1980, 12, 4)
         add.email = EMAIL
         add.birthDate = BIRTHDATE
         add.lastName = LAST_NAME
-        add.surname = SURNAME
+        add.firstName = FIRST_NAME
         add.username = USERNAME
         familyMemberService.add(add)
         assertEquals(familyMemberService.getAll().size, familyMemberRepository.findAll().size)
         val memberFromRepo = familyMemberRepository.findById(familyMemberRepository.count()).get()
         assertEquals(memberFromRepo.email, EMAIL)
         assertEquals(memberFromRepo.birthDate, BIRTHDATE)
-        assertEquals(memberFromRepo.surname, SURNAME)
+        assertEquals(memberFromRepo.firstName, FIRST_NAME)
         assertEquals(memberFromRepo.lastName, LAST_NAME)
         assertEquals(memberFromRepo.username, USERNAME)
         assertNotNull(memberFromRepo.uid)
@@ -102,8 +102,8 @@ open class FamilyMemberServiceTest @Autowired constructor
 
         val update = FamilyMember("Phil", "Collins", "phil@collins.com", "-", LocalDate.of(1951, 1, 30), family2)
         val updatedMember = familyMemberService.updateById(3, update)
-        assertNotEquals("user3", updatedMember.surname)
-        assertEquals("Phil", updatedMember.surname)
+        assertNotEquals("user3", updatedMember.firstName)
+        assertEquals("Phil", updatedMember.firstName)
         assertEquals("Collins", updatedMember.lastName)
         assertEquals("phil@collins.com", updatedMember.email)
         assertEquals("-", updatedMember.photo)

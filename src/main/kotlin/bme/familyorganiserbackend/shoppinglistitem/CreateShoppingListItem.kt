@@ -10,4 +10,4 @@ data class CreateShoppingListItem (
     var amount:Int=0,
 
     var shoppingListId: Long?=0
-): AbstractCreateDTO<ShoppingListItem>()
+): AbstractCreateDTO<ShoppingListItem>

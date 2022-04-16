@@ -43,10 +43,12 @@ open class DataLoader @Autowired constructor
         var family1 = Family("family 1")
         familyService.add(family1)
         val fm1 = FamilyMember("user", "user", "user@user.hu", null, LocalDate.of(1994, 2, 12), null)
+        fm1.username="user"
+        familyMemberService.add(fm1)
         familyMemberService.setPassword(fm1.uid,passwordEncoder.encode("user"))
+
         val fm2 = FamilyMember("user2", "user", "user2@user.hu", null, LocalDate.of(1996, 4, 2), null)
         val fm3 = FamilyMember("user3", "user", "user3@user.hu", null, LocalDate.of(1999, 11, 22), null)
-        familyMemberService.add(fm1)
         familyMemberService.add(fm2)
         familyMemberService.add(fm3)
         familyService.addMemberToFamily(1,1)

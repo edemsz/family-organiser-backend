@@ -13,4 +13,4 @@ data class GetShoppingListItem (
 
     var shoppingListId: Long=0
 
-):AbstractGetDTO<ShoppingListItem>()
+):AbstractGetDTO<ShoppingListItem>

@@ -9,4 +9,4 @@ data class FamilyPlain (
     var head: FamilyMemberPlain?=null,
     var members:List<FamilyMemberPlain?>?=null,
     var code:String
-):AbstractGetDTO<Family>()
+):AbstractGetDTO<Family>

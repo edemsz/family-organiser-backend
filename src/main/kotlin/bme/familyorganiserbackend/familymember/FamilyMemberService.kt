@@ -1,10 +1,13 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.abstracts.AbstractService
+import bme.familyorganiserbackend.auth.RegistrationDTO
 import bme.familyorganiserbackend.auth.User
+import bme.familyorganiserbackend.auth.UserMapper
 import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -18,6 +21,12 @@ class FamilyMemberService
 constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
+    @Autowired
+    @Lazy
+    lateinit var passwordEncoder:PasswordEncoder
+    @Autowired
+    @Lazy
+    lateinit var userMapper: UserMapper
 
 
 
@@ -53,12 +62,24 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
 
     }
     fun buildUserFromMember(member:FamilyMember): User {
-        return User()
-        //TODO ezt még meg kell írni
+        println()
+        val user=userMapper.entityToDto(member)
+        println("asd")
+        return user
     }
 
     fun setPassword(uid:String,passwordEncoded:String){
-        familyMemberRepository.findByUid(uid)?.password=passwordEncoded
+        val member=familyMemberRepository.findByUid(uid)
+        member?.password=passwordEncoded
+        familyMemberRepository.save(member!!)
+
+    }
+
+    fun register(registerData: RegistrationDTO) {
+        val familyMember=familyMemberRepository.findByUid(registerData.uid)
+        familyMember!!.password=passwordEncoder.encode(registerData.password)
+        familyMember.username=registerData.username
+        this.updateById(familyMember.id,familyMember)
     }
 
 

@@ -6,6 +6,6 @@ import bme.familyorganiserbackend.familymember.FamilyMember
 import java.time.LocalDate
 
 data class FamilyMemberGet (
-    val id:Long, val surname:String, val lastName:String, val email:String, val photo:String?,
+    val id:Long, val firstName:String, val lastName:String, val email:String, val photo:String?,
     val birthDate:LocalDate?, val family: FamilyPlain?, val username:String?, val uid:String
-) : AbstractGetDTO<FamilyMember>()
+) : AbstractGetDTO<FamilyMember>

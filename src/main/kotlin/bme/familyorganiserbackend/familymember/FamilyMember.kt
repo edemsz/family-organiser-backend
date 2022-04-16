@@ -4,8 +4,6 @@ import bme.familyorganiserbackend.abstracts.AbstractEntity
 import bme.familyorganiserbackend.auth.Role
 import bme.familyorganiserbackend.family.Family
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
 import javax.persistence.*
 
@@ -15,10 +13,10 @@ class FamilyMember(): AbstractEntity() {
 
 
     constructor(
-        surname: String, lastName: String,
+        firstName: String, lastName: String,
         email: String, photo: String?, birthDate: LocalDate?, family: Family?,
     ) : this() {
-        this.surname = surname
+        this.firstName = firstName
         this.lastName = lastName
         this.email = email
         this.photo = photo
@@ -40,7 +38,7 @@ class FamilyMember(): AbstractEntity() {
 
 
     @Column(nullable = false)
-    lateinit var surname: String
+    lateinit var firstName: String
 
     @Column(nullable = false)
     lateinit var lastName: String
@@ -80,6 +78,7 @@ class FamilyMember(): AbstractEntity() {
             this -> this.family?.head = null
         }
     }
+
 
 
 }

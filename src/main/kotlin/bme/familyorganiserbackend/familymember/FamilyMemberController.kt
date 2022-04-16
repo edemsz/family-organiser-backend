@@ -5,6 +5,7 @@ import bme.familyorganiserbackend.auth.*
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
 
 
 @RestController
@@ -25,25 +27,40 @@ open class FamilyMemberController:
      lateinit var authController: AuthController
 
 
-     @PostMapping("/sign-up")
+    @PostMapping("/sign-up")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
-        throw NotImplementedError()
+        if (authController.familyMemberRepository.existsByUsername(registerData.username)) {
+             throw ResponseStatusException(HttpStatus.CONFLICT,"Username already exists")
+         }
+        if(!authController.familyMemberRepository.existsByUid(registerData.uid)) {
+            throw ResponseStatusException(HttpStatus.CONFLICT, "UID does not exist")
+        }
+        authController.familyMemberService.register(registerData)
+
+        val loginDTO=LoginDTO(registerData.username,registerData.password)
+        return login(loginDTO)
     }
 
     @PostMapping("/login")
     @ApiOperation("Login method for users")
-    fun login(@RequestBody loginData: LoginDTO): ResponseEntity<String> {
+    fun login(@RequestBody loginData: LoginDTO): ResponseEntity<Tokens> {
         val authentication: Authentication = authController.authenticationManager
             .authenticate(UsernamePasswordAuthenticationToken(loginData.username, loginData.password))
 
+
         SecurityContextHolder.getContext().authentication = authentication
+
+
+
 
         val user: User = authentication.principal as User
         val jwtCookie: ResponseCookie? = authController.jwtTools.generateJwtCookie(user)
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-            .body(user.uid)
+        val tokens=Tokens(jwtCookie.toString(),"")
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(tokens)
     }
+
+
 
 
 }

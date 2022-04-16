@@ -16,4 +16,4 @@ data class ShoppingListGet (
 
     var location:String
 
-):AbstractGetDTO<ShoppingList>()
+):AbstractGetDTO<ShoppingList>

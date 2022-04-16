@@ -8,4 +8,7 @@ import javax.transaction.Transactional
 interface FamilyMemberRepository : AbstractRepository<FamilyMember>{
     fun findByUsername(username:String):FamilyMember?
     fun findByUid(uid:String):FamilyMember?
+    fun existsByUsername(username:String):Boolean
+    fun existsByUid(uid:String):Boolean
+
 }

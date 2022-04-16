@@ -8,4 +8,4 @@ data class CreateFamily (
     var headId: Long? = null,
     var memberIds: List<Long?>? = null,
     var code:String
-):AbstractCreateDTO<Family>()
+):AbstractCreateDTO<Family>

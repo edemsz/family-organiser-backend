@@ -39,6 +39,13 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
 
     }
 
+    protected open fun registerAuthentication(authManagerBuilder: AuthenticationManagerBuilder) {
+        authManagerBuilder
+            .inMemoryAuthentication()
+            .withUser("admin").password("admin").roles("ADMIN")
+    }
+
+
     @Bean
     override fun authenticationManagerBean(): AuthenticationManager? {
         return super.authenticationManagerBean()
@@ -67,11 +74,6 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
     }
 
 
-    protected open fun registerAuthentication(authManagerBuilder: AuthenticationManagerBuilder) {
-        authManagerBuilder
-            .inMemoryAuthentication()
-            .withUser("admin").password("admin").roles("ADMIN")
-    }
 
     @Bean
     open fun allowUrlEncodedSlashHttpFirewall(): HttpFirewall? {
