@@ -11,10 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 
@@ -25,9 +22,22 @@ open class FamilyMemberController:
  {
      @Autowired
      lateinit var authController: AuthController
+     @Autowired
+     lateinit var jwtTools: JWTTools
+
+     @GetMapping("/me")
+     @ApiOperation("Gets the family member of the current user")
+     fun getMe(@RequestHeader headers: HttpHeaders){
+         val authHeader:String= headers["Authorization"].toString()
+         println(headers["Authorization"])
+         println(headers.toString())
+         println(jwtTools.getUserNameFromJwtToken(authHeader))
+     }
 
 
-    @PostMapping("/sign-up")
+
+
+     @PostMapping("/sign-up")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
         if (authController.familyMemberRepository.existsByUsername(registerData.username)) {

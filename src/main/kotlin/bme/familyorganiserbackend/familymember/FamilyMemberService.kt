@@ -61,11 +61,8 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
         return buildUserFromMember(member)
 
     }
-    fun buildUserFromMember(member:FamilyMember): User {
-        println()
-        val user=userMapper.entityToDto(member)
-        println("asd")
-        return user
+    private fun buildUserFromMember(member: FamilyMember): User {
+        return userMapper.entityToDto(member)
     }
 
     fun setPassword(uid:String,passwordEncoded:String){

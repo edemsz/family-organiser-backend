@@ -1,10 +1,12 @@
 package bme.familyorganiserbackend.auth
 
-import bme.familyorganiserbackend.familymember.FamilyMember
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.interfaces.DecodedJWT
+import com.auth0.jwt.interfaces.JWTVerifier
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
 import org.springframework.http.ResponseCookie
 import org.springframework.stereotype.Component
 import java.util.*
@@ -24,10 +26,12 @@ open class JWTTools {
 
     fun generateJwtCookie(userPrincipal: User): ResponseCookie? {
         val jwt: String = generateTokenFromUsername(userPrincipal.username)
-        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge((24 * 60 * 60).toLong()).httpOnly(true).build()
+        print(jwt)
+        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge((24 * 60 * 60).toLong()).build()
     }
 
     fun getUserNameFromJwtToken(token: String?): String? {
+        println(token?.replace("[","")?.replace("]",""))
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).body.subject
     }
 
@@ -38,6 +42,29 @@ open class JWTTools {
             .setExpiration(Date(Date().time + jwtExpirationMs))
             .signWith(SignatureAlgorithm.HS512, jwtSecret)
             .compact()
+    }
+
+
+
+    open fun getDecodedJWT(authorizationHeader: String): DecodedJWT {
+        val token = authorizationHeader.substring("Bearer ".length)
+        val algorithm: Algorithm = Algorithm.HMAC256(jwtSecret)
+        val verifier: JWTVerifier = JWT.require(algorithm).build()
+        return verifier.verify(token)
+    }
+
+    open fun getUsernameFromJwt(authorizationHeader: String): String? {
+        return getDecodedJWT(authorizationHeader).subject
+    }
+
+    open fun createAccessToken(username: String?, roles: List<String?>?, requestUrl: String?): String? {
+        val algorithm: Algorithm = Algorithm.HMAC256(jwtSecret)
+        return JWT.create()
+            .withSubject(username)
+            .withExpiresAt(Date(System.currentTimeMillis() + jwtExpirationMs))
+            .withIssuer(requestUrl)
+            .withClaim("roles", roles)
+            .sign(algorithm)
     }
 
 
