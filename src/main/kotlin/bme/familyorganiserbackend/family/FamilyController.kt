@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/family")
 class FamilyController
-    //:AbstractController<Family, CreateFamily, FamilyPlain>()
+    :AbstractController<Family, CreateFamily, FamilyPlain>()
 {
     @Autowired
     lateinit var familyService: FamilyService
 
-    @Autowired
-    lateinit var getMapper: PlainFamilyMapper
 
 
     @PostMapping("/{id}/leave")

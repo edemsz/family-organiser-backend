@@ -3,7 +3,6 @@ package bme.familyorganiserbackend.familymember
 import bme.familyorganiserbackend.abstracts.AbstractService
 import bme.familyorganiserbackend.auth.RegistrationDTO
 import bme.familyorganiserbackend.auth.User
-import bme.familyorganiserbackend.auth.UserMapper
 import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,6 +20,9 @@ class FamilyMemberService
 constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
+    @Autowired
+    @Lazy
+    lateinit var passwordEncoder: PasswordEncoder
 
 
 
@@ -56,8 +58,7 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
 
     }
     private fun buildUserFromMember(member: FamilyMember): User {
-        throw NotImplementedError()
-        //return userMapper.entityToDto(member)
+        return User().fromMember(member)
     }
 
     fun setPassword(uid:String,passwordEncoded:String){
@@ -68,10 +69,10 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     }
 
     fun register(registerData: RegistrationDTO) {
-        /*val familyMember=familyMemberRepository.findByUid(registerData.uid)
+        val familyMember=familyMemberRepository.findByUid(registerData.uid)
         familyMember!!.password=passwordEncoder.encode(registerData.password)
         familyMember.username=registerData.username
-        this.updateById(familyMember.id,familyMember)*/
+        this.updateById(familyMember.id,familyMember)
     }
 
 
