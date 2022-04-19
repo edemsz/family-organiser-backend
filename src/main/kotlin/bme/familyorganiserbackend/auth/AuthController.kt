@@ -10,21 +10,5 @@ import org.springframework.stereotype.Component
 
 @Component
 class AuthController  {
-    @Autowired
-    lateinit var familyMemberService: FamilyMemberService
-    @Autowired
-    lateinit var authenticationManager: AuthenticationManager
-
-    @Autowired
-    lateinit var familyMemberRepository: FamilyMemberRepository
-
-    @Autowired
-    lateinit var roleRepository: RoleRepository
-
-    @Autowired
-    lateinit var encoder: PasswordEncoder
-
-    @Autowired
-    lateinit var jwtTools: JWTTools
 
 }

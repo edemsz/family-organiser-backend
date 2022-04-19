@@ -29,14 +29,7 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
 
 
     override fun configure(authenticationManagerBuilder: AuthenticationManagerBuilder) {
-        authenticationManagerBuilder
-            .userDetailsService(this.userDetailsService)
-            .passwordEncoder(passwordEncoder())
-        registerAuthentication(authenticationManagerBuilder)
-
-
-
-
+        authenticationManagerBuilder.userDetailsService(userDetailsService)
     }
 
     protected open fun registerAuthentication(authManagerBuilder: AuthenticationManagerBuilder) {
@@ -51,10 +44,6 @@ open class SecurityConfig: WebSecurityConfigurerAdapter() {
         return super.authenticationManagerBean()
     }
 
-    @Bean
-    open fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
 
     override fun configure(http: HttpSecurity) {
         http.cors().and().authorizeRequests().antMatchers(

@@ -22,6 +22,8 @@ open class FamilyMemberController:
     AbstractController<FamilyMember, CreateFamilyMember, FamilyMemberGet>()
  {
      @Autowired
+     lateinit var familyMemberService: FamilyMemberService
+     @Autowired
      lateinit var authController: AuthController
      @Autowired
      lateinit var jwtTools: JWTTools
@@ -42,14 +44,7 @@ open class FamilyMemberController:
      @PostMapping("/sign-up")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
-        if (authController.familyMemberRepository.existsByUsername(registerData.username)) {
-             throw ResponseStatusException(HttpStatus.CONFLICT,"Username already exists")
-         }
-        if(!authController.familyMemberRepository.existsByUid(registerData.uid)) {
-            throw ResponseStatusException(HttpStatus.NOT_FOUND, "UID does not exist")
-        }
-        val encodedPassword=authController.encoder.encode(registerData.password)
-        authController.familyMemberService.register(registerData.uid,registerData.username,encodedPassword)
+        familyMemberService.register(registerData)
 
         val loginDTO=LoginDTO(registerData.username,registerData.password)
         return login(loginDTO)
@@ -58,18 +53,8 @@ open class FamilyMemberController:
     @PostMapping("/login")
     @ApiOperation("Login method for users")
     fun login(@RequestBody loginData: LoginDTO): ResponseEntity<Tokens> {
-        val authentication: Authentication = authController.authenticationManager
-            .authenticate(UsernamePasswordAuthenticationToken(loginData.username, loginData.password))
-
-
-        SecurityContextHolder.getContext().authentication = authentication
-
-
-
-
-        val user: User = authentication.principal as User
-        val jwtCookie: ResponseCookie? = authController.jwtTools.generateJwtCookie(user)
-        val tokens=Tokens(jwtCookie.toString(),"")
+        val tokens=familyMemberService.login(loginData)
+        val jwtCookie=tokens.accessToken
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(tokens)
     }
 

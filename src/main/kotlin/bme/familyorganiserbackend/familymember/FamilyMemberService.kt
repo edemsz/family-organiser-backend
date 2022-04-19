@@ -1,12 +1,16 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.abstracts.AbstractService
-import bme.familyorganiserbackend.auth.RegistrationDTO
-import bme.familyorganiserbackend.auth.User
+import bme.familyorganiserbackend.auth.*
+import bme.familyorganiserbackend.basic.ResourceAlreadyExistsException
 import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Lazy
+import org.springframework.http.ResponseCookie
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -17,9 +21,16 @@ import org.springframework.stereotype.Service
 @Service
 class FamilyMemberService
 @Autowired
-constructor() : AbstractService<FamilyMember>() , UserDetailsService{
+constructor() : AbstractService<FamilyMember>() {
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
+    @Autowired
+    lateinit var passwordEncoder: PasswordEncoder
+    @Autowired
+    lateinit var authenticationManager: AuthenticationManager
+    @Autowired
+    lateinit var jwtTools: JWTTools
+
 
 
 
@@ -49,14 +60,6 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
         return member.get()
     }
 
-    override fun loadUserByUsername(username: String?): UserDetails {
-        val member=familyMemberRepository.findByUsername(username!!)?: throw UsernameNotFoundException("User not found")
-        return buildUserFromMember(member)
-
-    }
-    private fun buildUserFromMember(member: FamilyMember): User {
-        return User().fromMember(member)
-    }
 
     fun setPassword(uid:String,passwordEncoded:String){
         val member=familyMemberRepository.findByUid(uid)
@@ -65,12 +68,48 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
 
     }
 
-    fun register(uid:String,username: String?,passwordEncoded: String) {
-        val familyMember=familyMemberRepository.findByUid(uid)
-        familyMember!!.password=passwordEncoded
-        familyMember.username=username
+    fun register(registerData: RegistrationDTO) {
+        if(familyMemberRepository.existsByUsername(registerData.username)){
+            throw ResourceAlreadyExistsException()
+        }
+        if(!familyMemberRepository.existsByUid(registerData.uid)) {
+            throw ResourceNotFoundException()
+        }
+
+        val familyMember=familyMemberRepository.findByUid(registerData.uid)
+        familyMember!!.password=passwordEncoder.encode(registerData.password)
+        familyMember.username=registerData.username
         this.updateById(familyMember.id,familyMember)
     }
 
+    fun login(loginData: LoginDTO): Tokens {
+        val authentication: Authentication = authenticationManager
+                .authenticate(UsernamePasswordAuthenticationToken(loginData.username, loginData.password))
 
+
+        SecurityContextHolder.getContext().authentication = authentication
+
+
+
+
+        val user: User = authentication.principal as User
+        val jwtCookie: ResponseCookie? = jwtTools.generateJwtCookie(user)
+        val tokens= Tokens(jwtCookie.toString(),"")
+        return tokens
+
+    }
+}
+
+@Service
+class FamilyMemberAuthService:UserDetailsService{
+    @Autowired
+    lateinit var familyMemberRepository: FamilyMemberRepository
+
+    override fun loadUserByUsername(username: String?): UserDetails {
+        val member=familyMemberRepository.findByUsername(username!!)?: throw UsernameNotFoundException("User not found")
+        return buildUserFromMember(member)
+    }
+    private fun buildUserFromMember(member: FamilyMember): User {
+        return User().fromMember(member)
+    }
 }
