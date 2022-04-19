@@ -1,5 +1,9 @@
 package bme.familyorganiserbackend.auth
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.interfaces.DecodedJWT
+import com.auth0.jwt.interfaces.JWTVerifier
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.beans.factory.annotation.Value
@@ -41,7 +45,26 @@ open class JWTTools {
     }
 
 
+    fun getDecodedJWT(authorizationHeader: String): DecodedJWT {
+        val token = authorizationHeader.substring("Bearer ".length)
+        val algorithm: Algorithm = Algorithm.HMAC256(jwtSecret)
+        val verifier: JWTVerifier = JWT.require(algorithm).build()
+        return verifier.verify(token)
+    }
 
+    fun getUsernameFromJwt(authorizationHeader: String): String? {
+        return getDecodedJWT(authorizationHeader).subject
+    }
+
+    fun createAccessToken(username: String?, roles: List<String?>?, requestUrl: String?): String? {
+        val algorithm: Algorithm = Algorithm.HMAC256(jwtSecret)
+        return JWT.create()
+                .withSubject(username)
+                .withExpiresAt(Date(System.currentTimeMillis() + jwtExpirationMs))
+                .withIssuer(requestUrl)
+                .withClaim("roles", roles)
+                .sign(algorithm)
+    }
 
 
 }
