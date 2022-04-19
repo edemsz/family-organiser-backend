@@ -5,15 +5,8 @@ import bme.familyorganiserbackend.auth.*
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
-import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 
 
 @RestController
@@ -33,8 +26,6 @@ open class FamilyMemberController:
      @ApiOperation("Gets the family member of the current user")
      fun getMe(@RequestHeader headers: HttpHeaders){
          val authHeader:String= headers["Authorization"].toString()
-         println(headers["Authorization"])
-         println(headers.toString())
          println(jwtTools.getUserNameFromJwtToken(authHeader))
      }
 

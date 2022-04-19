@@ -22,8 +22,8 @@ open class JWTTools {
 
     fun generateJwtCookie(userPrincipal: User): ResponseCookie? {
         val jwt: String = generateTokenFromUsername(userPrincipal.username)
-        print(jwt)
-        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge((24 * 60 * 60).toLong()).build()
+        println(jwt)
+        return ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge((jwtExpirationMs).toLong()).build()
     }
 
     fun getUserNameFromJwtToken(token: String?): String? {
