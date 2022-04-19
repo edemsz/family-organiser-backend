@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
@@ -24,6 +25,7 @@ open class FamilyMemberController:
      lateinit var authController: AuthController
      @Autowired
      lateinit var jwtTools: JWTTools
+
 
      @GetMapping("/me")
      @ApiOperation("Gets the family member of the current user")
@@ -44,9 +46,10 @@ open class FamilyMemberController:
              throw ResponseStatusException(HttpStatus.CONFLICT,"Username already exists")
          }
         if(!authController.familyMemberRepository.existsByUid(registerData.uid)) {
-            throw ResponseStatusException(HttpStatus.CONFLICT, "UID does not exist")
+            throw ResponseStatusException(HttpStatus.NOT_FOUND, "UID does not exist")
         }
-        authController.familyMemberService.register(registerData)
+        val encodedPassword=authController.encoder.encode(registerData.password)
+        authController.familyMemberService.register(registerData.uid,registerData.username,encodedPassword)
 
         val loginDTO=LoginDTO(registerData.username,registerData.password)
         return login(loginDTO)

@@ -20,9 +20,6 @@ class FamilyMemberService
 constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
-    @Autowired
-    @Lazy
-    lateinit var passwordEncoder: PasswordEncoder
 
 
 
@@ -68,10 +65,10 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
 
     }
 
-    fun register(registerData: RegistrationDTO) {
-        val familyMember=familyMemberRepository.findByUid(registerData.uid)
-        familyMember!!.password=passwordEncoder.encode(registerData.password)
-        familyMember.username=registerData.username
+    fun register(uid:String,username: String?,passwordEncoded: String) {
+        val familyMember=familyMemberRepository.findByUid(uid)
+        familyMember!!.password=passwordEncoded
+        familyMember.username=username
         this.updateById(familyMember.id,familyMember)
     }
 
