@@ -1,6 +1,7 @@
 package bme.familyorganiserbackend.family
 
 import bme.familyorganiserbackend.abstracts.AbstractController
+import bme.familyorganiserbackend.abstracts.AbstractGetMapper
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -8,11 +9,15 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/family")
-class FamilyController:
-    AbstractController<Family, CreateFamily, FamilyPlain>()
+class FamilyController
+    //:AbstractController<Family, CreateFamily, FamilyPlain>()
 {
     @Autowired
     lateinit var familyService: FamilyService
+
+    @Autowired
+    lateinit var getMapper: PlainFamilyMapper
+
 
     @PostMapping("/{id}/leave")
     @ApiOperation(value = "Endpoint for leaving the family")

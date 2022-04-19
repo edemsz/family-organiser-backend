@@ -21,12 +21,6 @@ class FamilyMemberService
 constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     @Autowired
     lateinit var familyMemberRepository: FamilyMemberRepository
-    @Autowired
-    @Lazy
-    lateinit var passwordEncoder:PasswordEncoder
-    @Autowired
-    @Lazy
-    lateinit var userMapper: UserMapper
 
 
 
@@ -62,7 +56,8 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
 
     }
     private fun buildUserFromMember(member: FamilyMember): User {
-        return userMapper.entityToDto(member)
+        throw NotImplementedError()
+        //return userMapper.entityToDto(member)
     }
 
     fun setPassword(uid:String,passwordEncoded:String){
@@ -73,10 +68,10 @@ constructor() : AbstractService<FamilyMember>() , UserDetailsService{
     }
 
     fun register(registerData: RegistrationDTO) {
-        val familyMember=familyMemberRepository.findByUid(registerData.uid)
+        /*val familyMember=familyMemberRepository.findByUid(registerData.uid)
         familyMember!!.password=passwordEncoder.encode(registerData.password)
         familyMember.username=registerData.username
-        this.updateById(familyMember.id,familyMember)
+        this.updateById(familyMember.id,familyMember)*/
     }
 
 
