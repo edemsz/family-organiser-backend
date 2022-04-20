@@ -6,7 +6,6 @@ import bme.familyorganiserbackend.basic.ResourceAlreadyExistsException
 import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.Family
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseCookie
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
@@ -96,10 +95,8 @@ constructor() : AbstractService<FamilyMember>() {
     }
 
     fun getCurrentMember(authHeader:String?,cookie:String?):FamilyMember{
-        println(authHeader)
-        println(cookie)
         val jwt:String=authHeader?:cookie?:throw ResourceNotFoundException()
-        val username= jwtTools.getUsernameFromJwt(jwt!!) ?: throw ResourceNotFoundException()
+        val username= jwtTools.getUsernameFromJwt(jwt) ?: throw ResourceNotFoundException()
         val member=familyMemberRepository.findByUsername(username) ?: throw ResourceNotFoundException()
         return member
     }

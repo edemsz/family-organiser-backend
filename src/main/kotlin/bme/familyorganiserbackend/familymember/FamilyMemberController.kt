@@ -4,11 +4,9 @@ import bme.familyorganiserbackend.abstracts.AbstractController
 import bme.familyorganiserbackend.auth.*
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpCookie
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import javax.servlet.http.HttpServletRequest
 
 
 @RestController
@@ -28,7 +26,6 @@ open class FamilyMemberController:
      @ApiOperation("Gets the family member of the current user")
      fun getMe(@RequestHeader("Authorization") authHeader:String?, @CookieValue("jwt-cookie") cookie:String)
      :ResponseEntity<FamilyMemberGet>{
-         println(cookie)
 
          val member=familyMemberService.getCurrentMember(authHeader,cookie)
          return ResponseEntity.ok(getMapper.entityToDto(member))
