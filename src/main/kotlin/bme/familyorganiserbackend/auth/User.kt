@@ -42,4 +42,13 @@ class User (
     fun setPassword(password:String?){
         this.password=password
     }
+    fun fromMember(member:FamilyMember):User{
+        this.password=member.password
+        this.username=member.username
+        this.email=member.email
+        this.firstName=member.firstName
+        this.lastName=member.lastName
+        this.uid=member.uid
+        return this
+    }
 }

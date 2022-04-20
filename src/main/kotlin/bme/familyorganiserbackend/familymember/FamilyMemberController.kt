@@ -5,14 +5,8 @@ import bme.familyorganiserbackend.auth.*
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 
 
 @RestController
@@ -21,32 +15,26 @@ open class FamilyMemberController:
     AbstractController<FamilyMember, CreateFamilyMember, FamilyMemberGet>()
  {
      @Autowired
+     lateinit var familyMemberService: FamilyMemberService
+     @Autowired
      lateinit var authController: AuthController
      @Autowired
      lateinit var jwtTools: JWTTools
 
+
      @GetMapping("/me")
      @ApiOperation("Gets the family member of the current user")
-     fun getMe(@RequestHeader headers: HttpHeaders){
-         val authHeader:String= headers["Authorization"].toString()
-         println(headers["Authorization"])
-         println(headers.toString())
-         println(jwtTools.getUserNameFromJwtToken(authHeader))
+     fun getMe(@RequestHeader("Authorization") authHeader:String?, @CookieValue("jwt-cookie") cookie:String)
+     :ResponseEntity<FamilyMemberGet>{
+
+         val member=familyMemberService.getCurrentMember(authHeader,cookie)
+         return ResponseEntity.ok(getMapper.entityToDto(member))
      }
 
-
-
-
-     @PostMapping("/sign-up")
+    @PostMapping("/sign-up")
     @ApiOperation("Sign up method for users")
     fun register(@RequestBody registerData: RegistrationDTO): ResponseEntity<Tokens> {
-        if (authController.familyMemberRepository.existsByUsername(registerData.username)) {
-             throw ResponseStatusException(HttpStatus.CONFLICT,"Username already exists")
-         }
-        if(!authController.familyMemberRepository.existsByUid(registerData.uid)) {
-            throw ResponseStatusException(HttpStatus.CONFLICT, "UID does not exist")
-        }
-        authController.familyMemberService.register(registerData)
+        familyMemberService.register(registerData)
 
         val loginDTO=LoginDTO(registerData.username,registerData.password)
         return login(loginDTO)
@@ -55,19 +43,9 @@ open class FamilyMemberController:
     @PostMapping("/login")
     @ApiOperation("Login method for users")
     fun login(@RequestBody loginData: LoginDTO): ResponseEntity<Tokens> {
-        val authentication: Authentication = authController.authenticationManager
-            .authenticate(UsernamePasswordAuthenticationToken(loginData.username, loginData.password))
-
-
-        SecurityContextHolder.getContext().authentication = authentication
-
-
-
-
-        val user: User = authentication.principal as User
-        val jwtCookie: ResponseCookie? = authController.jwtTools.generateJwtCookie(user)
-        val tokens=Tokens(jwtCookie.toString(),"")
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,jwtCookie.toString()).body(tokens)
+        val tokens=familyMemberService.login(loginData)
+        val jwtCookie=tokens.accessToken
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, "jwt-cookie=$jwtCookie").body(tokens)
     }
 
 
