@@ -89,14 +89,19 @@ constructor() : AbstractService<FamilyMember>() {
 
         SecurityContextHolder.getContext().authentication = authentication
 
-
-
-
         val user: User = authentication.principal as User
-        val jwtCookie: ResponseCookie? = jwtTools.generateJwtCookie(user)
+        val jwtCookie = jwtTools.createAccessToken(user.username,null,null)
         val tokens= Tokens(jwtCookie.toString(),"")
         return tokens
+    }
 
+    fun getCurrentMember(authHeader:String?,cookie:String?):FamilyMember{
+        println(authHeader)
+        println(cookie)
+        val jwt:String=authHeader?:cookie?:throw ResourceNotFoundException()
+        val username= jwtTools.getUsernameFromJwt(jwt!!) ?: throw ResourceNotFoundException()
+        val member=familyMemberRepository.findByUsername(username) ?: throw ResourceNotFoundException()
+        return member
     }
 }
 
