@@ -49,3 +49,9 @@
 - A profil adatokhoz egy dátum megadó bemeneti mező is kellett, mivel készet nem találtam, implementáltam egyet
 - A profil beállításokat sharedPreference-be mentettem
 - Szerkesztettem a Family nézetet (de még nincs teljesen kész)
+
+###9.-ik és 10.-ik hétre
+- A fő nézetre készítettem egy viewPagert
+- A viewPagerhez készítettem egy topBart, amin az aktuális tab neve látszik...
+- Készítettem egy shopping list-et (de még nincs teljesen kész)
+- Alkalmazás kinéztetét refaktoráltam
