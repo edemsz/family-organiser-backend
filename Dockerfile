@@ -11,5 +11,7 @@ FROM openjdk:14-jdk-alpine
 
 COPY --from=build /home/app/target/family-organiser-backend.jar /usr/local/lib/family-organiser-backend.jar
 
+CMD ng serve --host 0.0.0.0 --disable-host-check
+
 EXPOSE 8050
 ENTRYPOINT ["java","-jar","/usr/local/lib/family-organiser-backend.jar"]
