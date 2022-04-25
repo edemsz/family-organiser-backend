@@ -3,12 +3,9 @@ version: '3'
 services:
   familydb:
     container_name: familydb
-    image: mariadb:10.4
+    image: mysql:5.7
     ports:
-      - target: 3306
-        published: 3306
-        protocol: tcp
-        mode: host
+      - 3306:3306
     volumes:
       - mariadb:/var/lib/mysql
     environment:
@@ -19,6 +16,7 @@ services:
       - 3306
     networks:
       - backdb
+    restart: always
 
   family-organiser-backend:
     container_name: family-organiser-backend
