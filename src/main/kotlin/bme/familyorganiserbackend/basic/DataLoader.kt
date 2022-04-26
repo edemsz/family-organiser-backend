@@ -1,9 +1,9 @@
 package bme.familyorganiserbackend.basic
 
 import bme.familyorganiserbackend.family.Family
+import bme.familyorganiserbackend.family.FamilyService
 import bme.familyorganiserbackend.familymember.FamilyMember
 import bme.familyorganiserbackend.familymember.FamilyMemberService
-import bme.familyorganiserbackend.family.FamilyService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
@@ -21,9 +21,9 @@ open class DataLoader @Autowired constructor
     private fun manyFamilies(){
         val n=1000
         for ( i in 1..n) {
-            val STRING_LENGTH = 10
+            val stringLength = 10
             val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-            val randomString = (1..STRING_LENGTH)
+            val randomString = (1..stringLength)
                 .map { nextInt(0, charPool.size) }
                 .map(charPool::get)
                 .joinToString("")
@@ -68,9 +68,9 @@ open class DataLoader @Autowired constructor
     private fun manyMembers() {
         val n=1000
         for ( i in 1..n) {
-            val STRING_LENGTH = 10
+            val stringLength = 10
             val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-            val randomString = (1..STRING_LENGTH)
+            val randomString = (1..stringLength)
                 .map { nextInt(0, charPool.size) }
                 .map(charPool::get)
                 .joinToString("")

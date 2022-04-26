@@ -26,9 +26,9 @@ class FamilyMember(): AbstractEntity() {
     }
 
     fun setUid(): FamilyMember {
-        val STRING_LENGTH = 10
+        val stringLength = 10
         val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-        val randomString = (1..STRING_LENGTH)
+        val randomString = (1..stringLength)
             .map { kotlin.random.Random.nextInt(0, charPool.size) }
             .map(charPool::get)
             .joinToString("")
