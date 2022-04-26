@@ -15,23 +15,33 @@ abstract class CreateFamilyMapper : AbstractCreateMapper<Family, CreateFamily>()
     @AfterMapping
     fun establishRelation(@MappingTarget family: Family, dto: CreateFamily){
         if(dto.headId !=null) {
-            if (!familyMemberRepository.existsById(dto.headId!!))
-                throw ResourceNotFoundException()
-            val member=familyMemberRepository.findById(dto.headId!!).get()
-            family.head = member
+            setHead(family,dto)
         }
+
         if(dto.memberIds!=null && dto.memberIds!!.isNotEmpty()){
-            for(memberId in dto.memberIds!!){
-                if(memberId==null)
-                    continue
-                if (!familyMemberRepository.existsById(memberId))
-                    throw ResourceNotFoundException()
-                val member=familyMemberRepository.findById(memberId).get()
-                if(family.members==null)
-                    family.members= mutableListOf(member)
-                else family.members!!.add(member)
-            }
+            setMembers(family,dto)
         }
 
     }
+
+    private fun setMembers(family: Family, dto: CreateFamily) {
+        for(memberId in dto.memberIds!!){
+            if(memberId==null)
+                continue
+            if (!familyMemberRepository.existsById(memberId))
+                throw ResourceNotFoundException()
+            val member=familyMemberRepository.findById(memberId).get()
+            if(family.members==null)
+                family.members= mutableListOf(member)
+            else family.members!!.add(member)
+        }
+    }
+
+    private fun setHead(family: Family, dto: CreateFamily){
+        if (!familyMemberRepository.existsById(dto.headId!!))
+            throw ResourceNotFoundException()
+        val member=familyMemberRepository.findById(dto.headId!!).get()
+        family.head = member
+    }
+
 }
