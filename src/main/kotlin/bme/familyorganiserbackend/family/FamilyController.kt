@@ -1,7 +1,6 @@
 package bme.familyorganiserbackend.family
 
 import bme.familyorganiserbackend.abstracts.AbstractController
-import bme.familyorganiserbackend.abstracts.AbstractGetMapper
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity

@@ -1,7 +1,6 @@
 package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractCreateMapper
-import bme.familyorganiserbackend.basic.ResourceNotFoundException
 import bme.familyorganiserbackend.family.FamilyService
 import org.mapstruct.AfterMapping
 import org.mapstruct.Mapper

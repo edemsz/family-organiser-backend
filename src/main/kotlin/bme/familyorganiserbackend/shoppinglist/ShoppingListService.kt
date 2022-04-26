@@ -6,7 +6,6 @@ import bme.familyorganiserbackend.family.FamilyService
 import bme.familyorganiserbackend.shoppinglistitem.ShoppingListItem
 import bme.familyorganiserbackend.shoppinglistitem.ShoppingListItemService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 

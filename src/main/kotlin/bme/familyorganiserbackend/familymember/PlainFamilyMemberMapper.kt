@@ -1,10 +1,8 @@
 package bme.familyorganiserbackend.familymember
 
 import bme.familyorganiserbackend.abstracts.AbstractGetMapper
-import bme.familyorganiserbackend.family.PlainFamilyMapper
 import org.mapstruct.AfterMapping
 import org.mapstruct.Mapper
-import org.mapstruct.Mapping
 import org.mapstruct.MappingTarget
 
 

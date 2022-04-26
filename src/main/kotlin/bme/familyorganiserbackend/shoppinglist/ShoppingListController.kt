@@ -1,7 +1,6 @@
 package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractController
-import bme.familyorganiserbackend.shoppinglistitem.GetShoppingListItem
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
