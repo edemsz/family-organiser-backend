@@ -2,6 +2,7 @@ package bme.familyorganiserbackend.shoppinglist
 
 import bme.familyorganiserbackend.abstracts.AbstractGetDTO
 import bme.familyorganiserbackend.shoppinglistitem.GetShoppingListItem
+import java.time.LocalDate
 
 data class ShoppingListGet (
     var id:Long,
@@ -14,6 +15,9 @@ data class ShoppingListGet (
 
     var items:List<GetShoppingListItem>?= emptyList(),
 
-    var location:String
+    var location:String,
+
+    var completedOn: LocalDate?
+
 
 ):AbstractGetDTO<ShoppingList>

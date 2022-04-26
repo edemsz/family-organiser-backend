@@ -19,11 +19,11 @@ class ShoppingList: AbstractEntity() {
     lateinit var family: Family
 
     @OneToMany(mappedBy = "shoppingList", cascade= arrayOf(CascadeType.MERGE))
-    var items:List<ShoppingListItem>?=null
+    var items:MutableList<ShoppingListItem> = mutableListOf()
 
     @Column
     lateinit var location:String
 
     @Column
-    lateinit var completedOn:LocalDate
+    var completedOn: LocalDate? =null
 }

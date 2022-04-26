@@ -11,6 +11,9 @@ data class GetShoppingListItem (
 
     var amount:Int=0,
 
-    var shoppingListId: Long=0
+    var shoppingListId: Long=0,
+
+    var purchased:Boolean=false
+
 
 ):AbstractGetDTO<ShoppingListItem>
