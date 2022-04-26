@@ -22,8 +22,8 @@ abstract class AbstractController<
 
     @GetMapping
     @ApiOperation(value = "Gets all entities.")
-    fun getEntities(@RequestParam(required = false) page:Int?,
-                    @RequestParam(required = false) size:Int?)
+    open fun getEntities(@RequestParam(required = false) page:Int?,
+                         @RequestParam(required = false) size:Int?)
     : ResponseEntity<List<GetDTO>> {
         val entities: List<Entity> = if (page == null || size == null) service.getAll()
         else

@@ -10,17 +10,22 @@ import javax.annotation.PostConstruct
 
 @Service
 class ShoppingListItemService : AbstractService<ShoppingListItem>() {
+    override fun add(e: ShoppingListItem): ShoppingListItem {
+        val item= super.add(e)
+        calculateListPrice(e)
+        return item
+    }
+
+
+
+
     override fun updateById(id: Long, entity: ShoppingListItem): ShoppingListItem {
         val i=super.updateById(id, entity)
         calculateListPrice(entity)
         return i
     }
 
-    override fun add(e: ShoppingListItem): ShoppingListItem {
-        val item= super.add(e)
-        calculateListPrice(e)
-        return item
-    }
+
 
     override fun delete(entity: ShoppingListItem?): Boolean {
         val success=super.delete(entity)
@@ -42,11 +47,13 @@ class ShoppingListItemService : AbstractService<ShoppingListItem>() {
     fun purchase(item:ShoppingListItem):ShoppingListItem{
         item.purchased=true
         updateById(item.id,item)
-        shoppingListService.calculatePurchase(item.shoppingList)
+        item.shoppingList?.let { shoppingListService.calculatePurchase(it) }
         return item
     }
-    fun calculateListPrice(item:ShoppingListItem):ShoppingList{
-        return shoppingListService.calculatePrice(item.shoppingList)
+    fun calculateListPrice(item:ShoppingListItem): ShoppingList? {
+        return item.shoppingList?.let { shoppingListService.calculatePrice(it) }
     }
+
+
 
 }

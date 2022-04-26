@@ -24,4 +24,7 @@ class ShoppingListItemController : AbstractController<ShoppingListItem, CreateSh
 
 
 
+
+
+
 }

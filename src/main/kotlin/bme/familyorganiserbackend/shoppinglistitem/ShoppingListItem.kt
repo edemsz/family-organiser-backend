@@ -18,7 +18,7 @@ class ShoppingListItem: AbstractEntity() {
     var amount:Int=0
 
     @ManyToOne
-    lateinit var shoppingList: ShoppingList
+    var shoppingList: ShoppingList?=null
 
     @Column
     var purchased:Boolean=false

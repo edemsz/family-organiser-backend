@@ -6,4 +6,6 @@ import javax.transaction.Transactional
 
 @Repository
 @Transactional(Transactional.TxType.MANDATORY)
-interface ShoppingListItemRepository:AbstractRepository<ShoppingListItem>
+interface ShoppingListItemRepository:AbstractRepository<ShoppingListItem>{
+
+}

@@ -10,6 +10,6 @@ abstract class GetShoppingListItemMapper
     : AbstractGetMapper<ShoppingListItem, GetShoppingListItem>(){
     @AfterMapping
     fun getId(@MappingTarget target: GetShoppingListItem, source: ShoppingListItem){
-        target.shoppingListId=source.shoppingList.id
+        target.shoppingListId= source.shoppingList?.id!!
     }
 }
