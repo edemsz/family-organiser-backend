@@ -42,4 +42,10 @@ class ShoppingListService : AbstractService<ShoppingList>() {
         return shoppingList
     }
 
+    fun calculatePrice(shoppingList:ShoppingList):ShoppingList{
+        shoppingList.fullPrice=shoppingList.items.sumOf { it.price*it.amount }
+        updateById(shoppingList.id,shoppingList)
+        return shoppingList
+    }
+
 }

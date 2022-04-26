@@ -44,10 +44,7 @@ abstract class AbstractService<Entity: AbstractEntity> : AbstractEmptyService,IB
     }
 
     override fun deleteById(id: Long) :Boolean{
-        return repository.findById(id).map { e ->
-            repository.delete(e)
-            true
-        }.orElse(false)
+        return repository.findById(id).let { this.delete(it.get()) }
     }
 }
 
