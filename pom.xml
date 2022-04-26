@@ -26,13 +26,14 @@
     <profiles>
         <profile>
             <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
 
         </profile>
         <profile>
             <id>production</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
 
             <dependencies>
                 <dependency>
@@ -132,7 +133,11 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
         <dependency>
             <groupId>io.mockk</groupId>
             <artifactId>mockk</artifactId>
