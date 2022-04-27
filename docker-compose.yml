@@ -32,7 +32,7 @@ services:
     networks:
       - backdb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://familydb:3306/familydb?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://familydb:3306/familydb
 
 
 
