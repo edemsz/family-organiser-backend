@@ -50,8 +50,13 @@
 - A profil beállításokat sharedPreference-be mentettem
 - Szerkesztettem a Family nézetet (de még nincs teljesen kész)
 
-###9.-ik és 10.-ik hétre
+### 9.-ik és 10.-ik hétre
 - A fő nézetre készítettem egy viewPagert
 - A viewPagerhez készítettem egy topBart, amin az aktuális tab neve látszik...
 - Készítettem egy shopping list-et (de még nincs teljesen kész)
-- Alkalmazás kinéztetét refaktoráltam
+- Alkalmazás kinéztetét refaktoráltam 
+### 11.-ik hétre
+- Frontenden mostmár több shopping lista is támogatott
+- Újrageneráltam a backendet
+- Kijavítottam a generált kód hibáit
+- Teszteltem a backendet (és 6 végpont nem elérhető, azt még nem sikerült kideríteni, hogy kinél van a hiba)
