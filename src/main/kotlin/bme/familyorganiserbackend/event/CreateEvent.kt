@@ -4,5 +4,6 @@ import bme.familyorganiserbackend.abstracts.AbstractCreateDTO
 import java.time.LocalDateTime
 
 data class CreateEvent(
+    val name:String,
     val start: LocalDateTime, val end: LocalDateTime, val familyId:Long,val place:String
 ) : AbstractCreateDTO<Event>

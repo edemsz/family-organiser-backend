@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne
 @Entity
 class Event : AbstractEntity() {
     @Column(nullable = false)
+    lateinit var name: String
+    @Column(nullable = false)
     lateinit var place: String
 
 
