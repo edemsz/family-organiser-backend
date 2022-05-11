@@ -62,7 +62,7 @@
 - Teszteltem a backendet (és 6 végpont nem elérhető, azt még nem sikerült kideríteni, hogy kinél van a hiba)
 
 ### 13.-ik hétre
-- Készítettem az Eventekről egy tervet
+- Készítettem az Eventekről egy [tervet](https://github.com/edemsz/family-organiser-backend/blob/master/Documentation/EventFrontend.png)
 - A Backend bekötésével foglalkoztam a héten, időközben felmerült problémák miatt refaktoráltam a kódot és:
   - LiveDatát használok
   - Hilt-et függőség injektálásra
