@@ -66,3 +66,5 @@
 - A Backend bekötésével foglalkoztam a héten, időközben felmerült problémák miatt refaktoráltam a kódot és:
   - LiveDatát használok
   - Hilt-et függőség injektálásra
+  - Ennek megfelelően kissé a projekt arhitektúráját is átalakítottam, jobban illeszkedik az MVVM architektúrához így.
+- A profil beállítások, log-in, regisztráció be vannak kötve a backenddel és hamarosan a család létrehozása, családhoz csatlakozás, bevásárlási listák és családtagok listája is be lesz kötve.  
