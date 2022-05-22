@@ -17,8 +17,6 @@ open class FamilyMemberController:
      @Autowired
      lateinit var familyMemberService: FamilyMemberService
      @Autowired
-     lateinit var authController: AuthController
-     @Autowired
      lateinit var jwtTools: JWTTools
 
 

@@ -9,4 +9,5 @@ abstract class AbstractEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     var id: Long = -1
+
 }
